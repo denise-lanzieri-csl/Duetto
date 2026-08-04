@@ -1,0 +1,38 @@
+---
+layout: default
+title: Contact
+permalink: /contact/
+heading: Contact
+lede: Where to find us, and what to write if you want to join.
+description: How to reach the group.
+---
+
+<section class="band">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="field">Email</p>
+      <p class="value"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+
+      <p class="field">Address</p>
+      <p class="value">
+        {%- for line in site.address_lines %}{{ line }}{% unless forloop.last %}<br>{% endunless %}{% endfor -%}
+      </p>
+
+      <p class="field">Elsewhere</p>
+      <p class="value"><a href="{{ site.github }}">GitHub</a></p>
+    </div>
+    <div>
+      <p class="field">Join us</p>
+      <p class="value">
+        We take PhD students and postdocs every year. Write with a CV and a paragraph
+        on which of the research directions interests you.
+      </p>
+
+      <p class="field">Visiting</p>
+      <p class="value">
+        The department is a ten-minute walk from the station. Let us know a few days
+        in advance so we can arrange building access.
+      </p>
+    </div>
+  </div>
+</section>

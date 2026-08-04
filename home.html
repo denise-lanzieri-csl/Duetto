@@ -1,0 +1,148 @@
+{%- comment -%}
+  Layout della home. Nel front matter di index.md scegli:
+    hero: ruler   -> titolo grande + righello a tacche
+    hero: video   -> video a tutto schermo, menu bianco sovrapposto
+{%- endcomment -%}
+{%- assign cinema = false -%}
+{%- if page.hero == "video" -%}{%- assign cinema = true -%}{%- endif -%}
+
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  {%- include head.html -%}
+</head>
+<body{% if cinema %} class="cinematic"{% endif %}>
+
+  {%- if cinema -%}
+    {%- include nav-centered.html -%}
+  {%- else -%}
+    {%- include nav.html -%}
+  {%- endif -%}
+
+  <main>
+
+  {%- if cinema %}
+    <section class="filmstrip" id="filmstrip">
+      <video id="hero-video" poster="{{ '/assets/hero-poster.jpg' | relative_url }}"
+             autoplay muted loop playsinline preload="metadata">
+        <source src="{{ '/assets/hero.mp4' | relative_url }}" type="video/mp4">
+        <img class="fallback" src="{{ '/assets/hero-poster.jpg' | relative_url }}" alt="">
+      </video>
+
+      <div class="filmstrip-claim"><p>{{ page.claim }}</p></div>
+
+      <div class="filmstrip-caption">
+        <p class="kicker">{{ site.institution }}</p>
+        <a class="cta" href="#about">Explore<span class="chev" aria-hidden="true">&#8964;</span></a>
+      </div>
+
+      <button class="filmstrip-toggle" id="hero-toggle" type="button"
+              aria-label="Pause background video">&#9612;&#9612;</button>
+    </section>
+  {%- else %}
+    <section class="wrap hero">
+      <p class="eyebrow">{{ site.institution }}</p>
+      <h1>{{ page.claim }}</h1>
+      {%- if page.standfirst %}<p class="standfirst">{{ page.standfirst }}</p>{% endif %}
+      <div class="actions">
+        <a class="btn" href="{{ '/publications/' | relative_url }}">Read the papers</a>
+        <a class="btn ghost" href="{{ '/code/' | relative_url }}">Browse the code</a>
+      </div>
+      <div class="ruler" aria-hidden="true"></div>
+      <div class="ruler-labels">
+        {%- for fact in page.facts %}<span>{{ fact }}</span>{% endfor %}
+      </div>
+    </section>
+  {%- endif %}
+
+    <section class="band" id="about">
+      <div class="wrap">
+        <div class="band-head"><h2>About</h2><span class="hairline"></span></div>
+        <div class="prose">{{ content }}</div>
+      </div>
+    </section>
+
+    {%- comment -%} I filoni arrivano da _data/research.yml {%- endcomment -%}
+    <section class="band tint">
+      <div class="wrap">
+        <div class="band-head"><h2>What we work on</h2><span class="hairline"></span></div>
+        <div class="topics">
+          {%- for item in site.data.research %}
+          <article class="topic">
+            <span class="tag">{{ item.tag }}</span>
+            <h3><a href="{{ '/research/' | relative_url }}#{{ item.id }}">{{ item.title }}</a></h3>
+            <p>{{ item.summary }}</p>
+          </article>
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} Solo le pubblicazioni con featured: true {%- endcomment -%}
+    {%- assign featured = site.data.publications | where: "featured", true -%}
+    {%- if featured.size > 0 %}
+    <section class="band">
+      <div class="wrap">
+        <div class="band-head"><h2>Recent work</h2><span class="hairline"></span></div>
+        <div class="pubs">
+          {%- for pub in featured %}
+          <article class="pub">
+            <div class="year">{{ pub.kind | default: pub.year }}</div>
+            <div>
+              <h3>{{ pub.title }}</h3>
+              <p class="authors">{{ pub.authors }}{% if pub.venue %} — <em>{{ pub.venue }}</em>{% endif %}</p>
+              {%- if pub.links %}
+              <p class="links">{% for l in pub.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}</p>
+              {%- endif %}
+            </div>
+          </article>
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+    {%- endif %}
+
+  </main>
+
+  {%- include footer.html -%}
+
+  {%- if cinema %}
+  <script>
+  (function () {
+    var bar   = document.getElementById('masthead');
+    var strip = document.getElementById('filmstrip');
+    var video = document.getElementById('hero-video');
+    var btn   = document.getElementById('hero-toggle');
+
+    // La barra diventa opaca quando il video esce dallo schermo
+    if (bar && strip && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) {
+        bar.classList.toggle('is-solid', !e[0].isIntersecting);
+      }, { rootMargin: '-70px 0px 0px 0px' }).observe(strip);
+    }
+
+    // Chi ha chiesto meno animazioni vede il fermo immagine
+    if (video && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.removeAttribute('autoplay');
+      video.pause();
+    }
+
+    if (video && btn) {
+      var sync = function () {
+        var playing = !video.paused;
+        btn.innerHTML = playing ? '&#9612;&#9612;' : '&#9654;';
+        btn.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+      };
+      btn.addEventListener('click', function () {
+        if (video.paused) { video.play(); } else { video.pause(); }
+      });
+      video.addEventListener('play', sync);
+      video.addEventListener('pause', sync);
+      sync();
+    }
+  })();
+  </script>
+  {%- endif %}
+
+</body>
+</html>

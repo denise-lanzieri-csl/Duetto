@@ -1,0 +1,28 @@
+---
+layout: default
+title: Research
+permalink: /research/
+heading: Research
+lede: >-
+  One or two sentences framing the whole programme, so the reader knows what the
+  directions below have in common.
+description: Research directions of the group.
+---
+
+<section class="wrap band">
+  {%- for item in site.data.research %}
+  <article class="entry" id="{{ item.id }}">
+    <div>
+      <span class="tag">{{ item.tag }}</span>
+      <h2>{{ item.title }}</h2>
+    </div>
+    <div>
+      {{ item.body | markdownify }}
+      <p class="meta">
+        <a href="{{ '/publications/' | relative_url }}">Related papers</a>
+        &middot; <a href="{{ '/code/' | relative_url }}">Code</a>
+      </p>
+    </div>
+  </article>
+  {%- endfor %}
+</section>

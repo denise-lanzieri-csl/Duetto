@@ -1,0 +1,33 @@
+# ============================================================
+# I FILONI DI RICERCA.
+# Compaiono sia in home (versione corta: solo `summary`) sia
+# nella pagina Research (versione lunga: `body`).
+# `id` serve ai link diretti, es. /research/#direction-1
+# ============================================================
+
+- id: direction-1
+  tag: Theme
+  title: First research direction
+  summary: Two lines on the direction, the method used, and the outcome you are after.
+  body: |
+    A full paragraph here, not a caption. What the open question is, which data
+    you use, and what your approach does differently.
+
+    A second paragraph if the direction deserves it: results so far,
+    collaborations, what comes next.
+
+- id: direction-2
+  tag: Theme
+  title: Second research direction
+  summary: Two lines on the direction, the method used, and the outcome you are after.
+  body: |
+    A full paragraph here, not a caption. What the open question is, which data
+    you use, and what your approach does differently.
+
+- id: direction-3
+  tag: Theme
+  title: Third research direction
+  summary: Two lines on the direction, the method used, and the outcome you are after.
+  body: |
+    A full paragraph here, not a caption. What the open question is, which data
+    you use, and what your approach does differently.

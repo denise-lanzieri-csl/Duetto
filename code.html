@@ -1,0 +1,45 @@
+---
+layout: default
+title: Code
+permalink: /code/
+heading: Code &amp; data
+lede: Everything we release is open source. Issues and pull requests are welcome.
+description: Software and datasets released by the group.
+---
+
+<section class="band">
+  <div class="wrap">
+    <div class="band-head"><h2>Software</h2><span class="hairline"></span></div>
+    <div class="topics">
+      {%- for item in site.data.code.software %}
+      <article class="topic">
+        <span class="tag">{{ item.tag }}</span>
+        <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
+        <p>{{ item.description }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{%- if site.data.code.datasets %}
+<section class="band tint">
+  <div class="wrap">
+    <div class="band-head"><h2>Datasets</h2><span class="hairline"></span></div>
+    <div class="pubs">
+      {%- for d in site.data.code.datasets %}
+      <article class="pub">
+        <div class="year">{{ d.year }}</div>
+        <div>
+          <h3>{{ d.name }}</h3>
+          <p class="authors">{{ d.description }}</p>
+          {%- if d.links %}
+          <p class="links">{% for l in d.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}</p>
+          {%- endif %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}

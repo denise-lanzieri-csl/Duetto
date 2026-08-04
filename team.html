@@ -1,0 +1,45 @@
+---
+layout: default
+title: Team
+permalink: /team/
+heading: Team
+lede: >-
+  One sentence on how the group is composed, and a pointer to the openings if you
+  have any.
+description: People in the group.
+---
+
+{%- for section in site.data.people %}
+<section class="band{% cycle '', ' tint' %}">
+  <div class="wrap">
+    <div class="band-head"><h2>{{ section.group }}</h2><span class="hairline"></span></div>
+
+    {%- if section.inline %}
+    {%- comment -%} Gruppo senza foto (es. alumni): solo nomi in fila {%- endcomment -%}
+    <div class="prose">
+      <p>
+        {%- for m in section.members -%}
+        {{ m.name }}{% if m.role %}, {{ m.role }}{% endif %}{% unless forloop.last %} &middot; {% endunless %}
+        {%- endfor -%}
+      </p>
+    </div>
+
+    {%- else %}
+    <div class="people">
+      {%- for m in section.members %}
+      <article class="person">
+        {%- if m.photo %}
+        <img src="{{ '/assets/people/' | append: m.photo | relative_url }}" alt="" loading="lazy" width="600" height="600">
+        {%- endif %}
+        <h3>{{ m.name }}</h3>
+        {%- if m.role %}<p>{{ m.role }}</p>{% endif %}
+        {%- if m.links %}
+        <p class="person-links">{% for l in m.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}</p>
+        {%- endif %}
+      </article>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+  </div>
+</section>
+{%- endfor %}

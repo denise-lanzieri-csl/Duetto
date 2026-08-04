@@ -1,0 +1,26 @@
+
+title: Duetto
+tagline: Augmented creativity
+description: One sentence describing what the group works on.
+
+email: denise.lanzeri@sony.com
+institution: Sony CSL - Rome
+address_lines:
+  - Piazza del Viminale, 00184 Roma RM
+
+github: https://github.com/denise-lanzieri-csl
+scholar: "#"
+
+url: "https://denise-lanzieri-csl.github.io"
+baseurl: "/Duetto"
+
+
+include:
+  - _pages
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .jekyll-cache

@@ -1,0 +1,42 @@
+# ============================================================
+# LE PUBBLICAZIONI.
+# Il raggruppamento per anno e l'ordinamento sono automatici:
+# scrivi le voci in qualsiasi ordine, il sito le mette a posto.
+# `featured: true` la fa comparire anche in home.
+# ============================================================
+
+- title: Title of the paper, set exactly as published
+  authors: "Surname, N.; Surname, N.; Surname, N."
+  venue: submitted to Journal
+  year: 2026
+  kind: Preprint
+  featured: true
+  links:
+    - label: arXiv
+      url: "#"
+    - label: PDF
+      url: "#"
+    - label: Code
+      url: "#"
+
+- title: Title of the paper, set exactly as published
+  authors: "Surname, N.; Surname, N."
+  venue: "Journal, vol. 12, 345"
+  year: 2026
+  kind: Journal
+  links:
+    - label: arXiv
+      url: "#"
+    - label: DOI
+      url: "#"
+
+- title: Title of the paper, set exactly as published
+  authors: "Surname, N.; Surname, N."
+  venue: Workshop at Conference
+  year: 2025
+  kind: Conference
+  links:
+    - label: arXiv
+      url: "#"
+    - label: Poster
+      url: "#"

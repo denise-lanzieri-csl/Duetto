@@ -1,0 +1,23 @@
+# ============================================================
+# IL MENU, IN UN SOLO POSTO.
+# Aggiungi una riga qui e la voce compare su tutte le pagine.
+# `url` deve combaciare col `permalink` della pagina.
+# ============================================================
+
+- title: Home
+  url: /
+
+- title: Research
+  url: /research/
+
+- title: Team
+  url: /team/
+
+- title: Publications
+  url: /publications/
+
+- title: Code
+  url: /code/
+
+- title: Contact
+  url: /contact/

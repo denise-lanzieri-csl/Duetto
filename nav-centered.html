@@ -1,0 +1,25 @@
+{%- comment -%}
+  Variante del menu con il marchio al centro, per la home con video.
+  I link si dividono da soli: prima metà a sinistra, seconda a destra.
+{%- endcomment -%}
+
+{%- assign items = site.data.nav | where_exp: "i", "i.url != '/'" -%}
+{%- assign half = items.size | plus: 1 | divided_by: 2 -%}
+
+<header class="masthead" id="masthead">
+  <div class="wrap masthead-inner centered">
+    <nav class="navlinks left" aria-label="Main">
+      {%- for item in items limit: half %}
+      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      {%- endfor %}
+    </nav>
+
+    <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title | upcase }}</a>
+
+    <nav class="navlinks right" aria-label="More">
+      {%- for item in items offset: half %}
+      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      {%- endfor %}
+    </nav>
+  </div>
+</header>

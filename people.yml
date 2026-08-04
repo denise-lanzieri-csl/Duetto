@@ -1,0 +1,49 @@
+# ============================================================
+# LE PERSONE. Niente HTML: aggiungi una voce qui e la scheda
+# compare da sola nella pagina Team.
+# La foto va in assets/people/ e deve essere quadrata (600x600 px).
+# I campi photo, role e links sono opzionali.
+# ============================================================
+
+- group: Faculty
+  members:
+    - name: Full Name
+      role: Principal Investigator
+      photo: person-1.jpg
+      links:
+        - label: Site
+          url: "#"
+        - label: Scholar
+          url: "#"
+
+- group: Postdocs
+  members:
+    - name: Full Name
+      role: Postdoctoral researcher
+      photo: person-2.jpg
+      links:
+        - label: Site
+          url: "#"
+
+    - name: Full Name
+      role: Postdoctoral researcher
+      photo: person-3.jpg
+
+- group: PhD students
+  members:
+    - name: Full Name
+      role: PhD student
+      photo: person-4.jpg
+
+    - name: Full Name
+      role: PhD student
+      photo: person-5.jpg
+
+# Gli alumni sono solo nomi, senza foto: li stampiamo come elenco
+- group: Alumni
+  inline: true
+  members:
+    - name: Full Name
+      role: now at Institution
+    - name: Full Name
+      role: now at Institution

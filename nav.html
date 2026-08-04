@@ -1,0 +1,15 @@
+{%- comment -%}
+  Il menu si costruisce da _data/nav.yml. La voce della pagina corrente
+  riceve aria-current="page" da sola: nessun ritocco manuale.
+{%- endcomment -%}
+
+<header class="masthead" id="masthead">
+  <div class="wrap masthead-inner">
+    <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title | upcase }}</a>
+    <nav class="navlinks" aria-label="Main">
+      {%- for item in site.data.nav %}
+      <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {%- endfor %}
+    </nav>
+  </div>
+</header>

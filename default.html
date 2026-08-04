@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  {%- include head.html -%}
+</head>
+<body>
+
+  {%- include nav.html -%}
+
+  <main>
+    {%- comment -%}
+      Se la pagina ha `heading` nel front matter, stampiamo
+      l'intestazione standard. La home non ce l'ha e usa il suo layout.
+    {%- endcomment -%}
+    {%- if page.heading %}
+    <section class="wrap pagehead">
+      <h1>{{ page.heading }}</h1>
+      {%- if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+    </section>
+    {%- endif %}
+
+    {{ content }}
+  </main>
+
+  {%- include footer.html -%}
+
+</body>
+</html>
