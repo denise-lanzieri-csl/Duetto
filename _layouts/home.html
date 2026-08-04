@@ -4,7 +4,7 @@
     hero: video   -> video a tutto schermo, menu bianco sovrapposto
 {%- endcomment -%}
 {%- assign cinema = false -%}
-{%- if page.hero == "video" -%}{%- assign cinema = true -%}{%- endif -%}
+{%- if page.hero == "video" or page.hero == "image" -%}{%- assign cinema = true -%}{%- endif -%}
 
 <!doctype html>
 <html lang="{{ site.lang | default: 'en' }}">
@@ -13,7 +13,11 @@
 </head>
 <body{% if cinema %} class="cinematic"{% endif %}>
 
-  {%- if cinema -%}
+  {%- comment -%}
+    Solo la variante video usa il marchio centrato; con l'immagine
+    resta il menu normale, che evidenzia la pagina corrente.
+  {%- endcomment -%}
+  {%- if page.hero == "video" -%}
     {%- include nav-centered.html -%}
   {%- else -%}
     {%- include nav.html -%}
@@ -21,7 +25,35 @@
 
   <main>
 
-  {%- if cinema %}
+  {%- if page.hero == "image" %}
+    {%- comment -%}
+      Immagine a tutto schermo. Il file va in assets/ e si indica
+      con hero_image nel front matter di index.md.
+    {%- endcomment -%}
+    <section class="filmstrip" id="filmstrip">
+      <div class="still-bg" role="img" aria-label="{{ page.hero_alt | default: '' }}"
+           style="background-image:url('{{ page.hero_image | default: '/assets/hero.jpg' | relative_url }}')"></div>
+
+      {%- comment -%}
+        Testo centrale opzionale: compare solo se in index.md valorizzi
+        hero_title o tagline. Se il logo è già dentro l'immagine, lasciali fuori.
+      {%- endcomment -%}
+      {%- if page.hero_logo or page.hero_title or page.tagline %}
+      <div class="hero-center">
+        {%- if page.hero_logo %}
+        <img class="hero-logo" src="{{ page.hero_logo | relative_url }}"
+             alt="{{ site.title }}" width="1180" height="308">
+        {%- endif %}
+        {%- if page.hero_title %}<h1>{{ page.hero_title }}</h1>{% endif %}
+        {%- if page.tagline and page.hero_title %}<hr class="rule">{% endif %}
+        {%- if page.tagline %}<p>{{ page.tagline }}</p>{% endif %}
+      </div>
+      {%- endif %}
+
+      <a class="hero-scroll" href="#about" aria-label="Scroll to content"><span>&#8964;</span></a>
+    </section>
+
+  {%- elsif page.hero == "video" %}
     <section class="filmstrip" id="filmstrip">
       <video id="hero-video" poster="{{ '/assets/hero-poster.jpg' | relative_url }}"
              autoplay muted loop playsinline preload="metadata">

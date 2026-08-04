@@ -1,23 +1,24 @@
-
+#
 title: Duetto
-tagline: Augmented creativity
+tagline: Augmented crativity
 description: One sentence describing what the group works on.
 
-email: denise.lanzeri@sony.com
-institution: Sony CSL - Rome
+email: group@university.edu
+institution: Department of X, University of Y
 address_lines:
-  - Piazza del Viminale, 00184 Roma RM
+  - Department of X
+  - University of Y
+  - Street 1, 80100 City
 
 github: https://github.com/denise-lanzieri-csl
 scholar: "#"
+
 
 url: "https://denise-lanzieri-csl.github.io"
 baseurl: "/Duetto"
 
 
-include:
-  - _pages
-
+ 
 exclude:
   - Gemfile
   - Gemfile.lock
