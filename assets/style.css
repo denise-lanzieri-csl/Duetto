@@ -372,3 +372,61 @@
   height:auto;
   filter:drop-shadow(0 2px 30px rgba(0,0,0,.5));
 }
+
+/* Scheda persona: ruolo in evidenza, sottoruolo più leggero, filetto sotto */
+.people{ align-items:start; }
+.person{ display:flex; flex-direction:column; }
+.person h3{ margin:14px 0 6px; }
+.person .role{
+  font-family:var(--display); font-weight:600; font-size:0.92rem;
+  letter-spacing:-0.01em; color:var(--ink);
+  text-transform:none; margin:0 0 2px;
+}
+.person .subrole{
+  font-family:var(--body); font-size:0.92rem;
+  color:var(--muted); text-transform:none;
+  letter-spacing:0; margin:0 0 12px;
+}
+.person::after{
+  content:""; display:block; margin-top:auto;
+  border-top:1px solid var(--rule); padding-top:0;
+}
+
+/* Crediti sotto la griglia delle persone */
+.credit{
+  font-family:var(--mono); font-size:0.72rem;
+  letter-spacing:0.06em; color:var(--muted);
+  margin:44px 0 0; text-align:right;
+}
+
+/* Filetti allineati: le schede si stirano tutte all'altezza della più alta,
+   e il filetto viene spinto in fondo dallo spazio residuo */
+   .people{ align-items:stretch; }
+   .person{ height:100%; }
+   .person .subrole{ margin-bottom:0; }
+
+
+/* Icone social */
+.social{
+  list-style:none; display:flex; gap:14px;
+  margin:0 0 20px; padding:0;
+}
+.social a{
+  display:grid; place-items:center;
+  width:40px; height:40px; border-radius:50%;
+  background:var(--ink); color:var(--paper);
+  transition:background .2s ease;
+}
+.social a:hover{ background:var(--accent); text-decoration:none; }
+.social svg{ width:19px; height:19px; fill:currentColor; }
+
+/* Elenco senza pallini, per i collaboratori */
+.plain{
+  list-style:none; margin:0 0 20px; padding:0;
+}
+.plain li{
+  padding:8px 0;
+  border-bottom:1px solid var(--rule);
+  font-size:1.02rem;
+}
+.plain li:last-child{ border-bottom:0; }

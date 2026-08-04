@@ -1,49 +1,27 @@
 # ============================================================
-# LE PERSONE. Niente HTML: aggiungi una voce qui e la scheda
-# compare da sola nella pagina Team.
+# LE PERSONE. Elenco unico, senza gruppi.
+# L'ordine qui è l'ordine in cui compaiono nella pagina.
 # La foto va in assets/people/ e deve essere quadrata (600x600 px).
-# I campi photo, role e links sono opzionali.
+# subrole e links sono opzionali.
 # ============================================================
 
-- group: Faculty
-  members:
-    - name: Full Name
-      role: Principal Investigator
-      photo: person-1.jpg
-      links:
-        - label: Site
-          url: "#"
-        - label: Scholar
-          url: "#"
+- name: Prof. Vittorio Loreto PhD
+  role: Director
+  subrole: Co-PI Augmented Creativity
+  photo: vittorio-loreto.jpg
+  focus: 30% center
 
-- group: Postdocs
-  members:
-    - name: Full Name
-      role: Postdoctoral researcher
-      photo: person-2.jpg
-      links:
-        - label: Site
-          url: "#"
+- name: Alessandro Londei PhD
+  role: Researcher
+  subrole: Co-PI Augmented Creativity
+  photo: alessandro-londei.jpg
+  focus: 40% center
 
-    - name: Full Name
-      role: Postdoctoral researcher
-      photo: person-3.jpg
+- name: Denise Lanzieri PhD
+  role: Associate Researcher
+  photo: denise-lanzieri.jpg
 
-- group: PhD students
-  members:
-    - name: Full Name
-      role: PhD student
-      photo: person-4.jpg
-
-    - name: Full Name
-      role: PhD student
-      photo: person-5.jpg
-
-# Gli alumni sono solo nomi, senza foto: li stampiamo come elenco
-- group: Alumni
-  inline: true
-  members:
-    - name: Full Name
-      role: now at Institution
-    - name: Full Name
-      role: now at Institution
+- name: Milena Di Canio
+  role: Corporate Communications and Events Manager
+  photo: milena-dicanio.jpg
+  focus: 70% center
