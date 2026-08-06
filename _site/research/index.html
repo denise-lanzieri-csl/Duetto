@@ -3,9 +3,9 @@
 <head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Research — Duetto</title>
 
-<meta name="description" content="Research directions of the group.">
+<meta name="description" content="The research behind Duetto, from the Large Movement Model to live performance.">
 <meta property="og:title" content="Research">
-<meta property="og:description" content="Research directions of the group.">
+<meta property="og:description" content="The research behind Duetto, from the Large Movement Model to live performance.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="http://localhost:4000/research/">
 <link rel="canonical" href="http://localhost:4000/research/">
@@ -30,60 +30,350 @@
 </header>
 <main>
     <section class="wrap pagehead">
-      <h1>Research</h1><p class="lede">One or two sentences framing the whole programme, so the reader knows what the directions below have in common.</p>
+      <h1>Research</h1><p class="lede">We build systems that explore rather than reproduce. Duetto is where that question meets the human body — a real-time dialogue between a dancer and a generative model.</p>
     </section>
 
-    <section class="wrap band">
-  <article class="entry" id="direction-1">
-    <div>
-      <span class="tag">Theme</span>
-      <h2>First research direction</h2>
-    </div>
-    <div>
-      <p>A full paragraph here, not a caption. What the open question is, which data
-you use, and what your approach does differently.</p>
+    <nav class="toc" aria-label="On this page">
+  <p class="toc-title">What's on this page</p>
+  <ol>
+    <li><a href="#why-movement">Why movement</a></li>
+    <li><a href="#large-movement-model">The Large Movement Model</a></li>
+    <li><a href="#duetto">Duetto</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#staying-open">Staying open</a></li>
+    <li><a href="#beyond-the-stage">Beyond the stage</a></li>
+    <li><a href="#performances">Live performances</a></li>
+  </ol>
+</nav><section class="band" id="why-movement">
+  <div class="wrap">
 
-<p>A second paragraph if the direction deserves it: results so far,
-collaborations, what comes next.</p>
+    <div class="band-head">
+      <h2>Why movement</h2>
+      <span class="hairline"></span><span class="band-tag">Foundations</span>
+    </div><div class="split">
+      <div class="split-main">
+        <div class="prose"><p>Building a system designed for genuine exploration means the choice of
+domain is not neutral. We chose the human body because it sits in a
+uniquely productive position: concrete enough to measure, open-ended
+enough to be genuinely creative.</p>
 
-      <p class="meta">
-        <a href="/publications/">Related papers</a>
-        &middot; <a href="/code/">Code</a>
-      </p>
-    </div>
-  </article>
-  <article class="entry" id="direction-2">
-    <div>
-      <span class="tag">Theme</span>
-      <h2>Second research direction</h2>
-    </div>
-    <div>
-      <p>A full paragraph here, not a caption. What the open question is, which data
-you use, and what your approach does differently.</p>
+<p>Human movement is the expression of a complex dynamical system — a
+high-dimensional trajectory through phase space, non-stationary,
+sensitive to initial conditions, continuously modulated by the feedback
+between internal state and external environment. As a time series it
+carries information across simultaneous timescales, from joint-level
+dynamics to gestural phrasing, and stays entangled with intention and
+context in ways that make it irreducible to pure biomechanics.</p>
+</div>
+        <div class="subblock">
+          <h3>A spectrum of semantic constraint</h3>
+          <div class="prose"><p>Unlike language, where a misplaced word breaks coherence, movement
+operates across a range of tolerances. Expressive domains such as
+dance afford vast combinatorial freedom: the syntax is permissive
+and novelty is not an error. Procedural domains — a surgeon
+operating, an athlete executing a technique — impose tight
+boundaries where deviation carries real cost.</p>
 
-      <p class="meta">
-        <a href="/publications/">Related papers</a>
-        &middot; <a href="/code/">Code</a>
-      </p>
-    </div>
-  </article>
-  <article class="entry" id="direction-3">
-    <div>
-      <span class="tag">Theme</span>
-      <h2>Third research direction</h2>
-    </div>
-    <div>
-      <p>A full paragraph here, not a caption. What the open question is, which data
-you use, and what your approach does differently.</p>
+<p>The same body, the same joints, the same physics, but an entirely
+different tolerance for variation. That spectrum is a feature: it
+means a movement model is not one fixed notion of correctness, but
+a framework that calibrates its generative logic to the semantic
+regime of the application.</p>
+</div>
+        </div>
+      </div>
+      <figure class="fig split-side">
+        <img src="/assets/research/grid_animation.webp"
+             alt="Uno scheletro tracciato in movimento su una griglia" loading="lazy">
+      </figure>
 
-      <p class="meta">
-        <a href="/publications/">Related papers</a>
-        &middot; <a href="/code/">Code</a>
-      </p>
     </div>
-  </article>
+
+  </div>
+</section><section class="band tint" id="large-movement-model">
+  <div class="wrap">
+
+    <div class="band-head">
+      <h2>The Large Movement Model</h2>
+      <span class="hairline"></span><span class="band-tag">Model</span>
+    </div><div class="split flip">
+      <div class="split-main">
+        <div class="prose"><p>What made large language models possible was not scale alone, but the
+insight that language has a grammar: an underlying statistical structure
+that, learned deeply enough, allows a system to generate coherent and
+even creative output.</p>
+
+<p>Movement has a grammar too. A Large Movement Model is to the body what a
+language model is to language — joints serve as vocabulary, movement
+sequences as sentences, and the model learns the underlying rules of how
+a body moves through space and time.</p>
+</div>
+      </div>
+      <figure class="fig split-side">
+        <img src="/assets/research/D1_M17_T1_Frontal_trajectory.svg"
+             alt="Uno scheletro tracciato in movimento su una griglia" loading="lazy">
+      </figure>
+
+    </div>
+
+  </div>
+</section><section class="band" id="duetto">
+  <div class="wrap">
+
+    <div class="band-head">
+      <h2>Duetto</h2>
+      <span class="hairline"></span><span class="band-tag">Application</span>
+    </div><div class="split">
+      <div class="split-main">
+        <div class="prose"><p>Duetto is the first application and proof of concept of the Large
+Movement Model, built around two questions: how technology can enrich
+dancers’ creative practices, and whether deep learning can power a
+movement suggestion system for dancers.</p>
+
+<p>The core challenge is a generative system capable of continuous,
+real-time, bidirectional interaction with a human performer — without
+the latency that would break creative flow. To the best of current
+knowledge this remains an open problem in the field. The human moves,
+the system listens, the system proposes, the human responds.</p>
+</div>
+        <div class="subblock">
+          <h3>Why dance</h3>
+          <div class="prose"><p>Dance was chosen not because it is the only application, but because
+it represents the upper bound of movement complexity: maximally
+free, expressive, and creative. If a system can hold a dialogue with
+a dancer, it can hold one with any body in any context.</p>
+</div>
+        </div>
+      </div>
+      <figure class="fig split-side">
+        <img src="/assets/research/dance1.jpg"
+             alt="Una danzatrice in scena accanto alla proiezione del suo scheletro digitale" loading="lazy">
+        <figcaption><span class="credit-line">CCN/Aterballetto al Festival Aperto con Microdanze e Over Dance</span>
+        </figcaption>
+      </figure>
+
+    </div>
+
+  </div>
+</section><section class="band tint" id="how-it-works">
+  <div class="wrap">
+
+    <div class="band-head">
+      <h2>How it works</h2>
+      <span class="hairline"></span><span class="band-tag">Method</span>
+    </div><div class="centered">
+      <div class="split-main">
+        <div class="prose"><p>The pipeline starts from video, from which we extract audio signals,
+high-dimensional motion capture, and multimodal input from the body in
+movement. From there the model learns to compress and structure that
+data into latent representations, then to generate new movement rather
+than memorise what it has seen.</p>
+</div>
+        <div class="subblock">
+          <h3>Data collection</h3>
+          <div class="prose"><p>In the first session we recruited dancers across three experience
+levels — professional, semi-professional, non-professional — and
+captured their movement across nine musical conditions varying in
+intensity, style, and tempo, to maximise diversity in the training
+distribution.</p>
+
+<p>In the second session, sixteen professional dancers each performed
+four improvised pieces under choreographic guidance. In two of the
+four trials they moved while viewing a skeletonised projection of
+their own body — a feedback condition that directly informed the
+design of the interactive system.</p>
+</div>
+          <figure class="fig">
+            <img src="/assets/research/DSC00383.JPG"
+                 alt="Uno scheletro tracciato in movimento su una griglia" loading="lazy">
+          </figure>
+        </div>
+        <div class="subblock">
+          <h3>Pose estimation</h3>
+          <div class="prose"><p>Movement is captured with sVision, our real-time human pose
+estimation pipeline, which extracts key anatomical landmarks and
+represents the body as a set of spatial coordinates evolving over
+time.</p>
+</div>
+        </div>
+        <div class="subblock">
+          <h3>Quantising the body</h3>
+          <div class="prose"><p>Raw joint coordinates must be transformed into a discrete vocabulary
+a generative model can process. The choice of quantisation framework
+determines whether the resulting token space is interpretable and
+controllable, or simply a black box.</p>
+
+<p>VQ-VAE is the current state of the art and serves as our baseline.
+Building on it we developed SOM-VQ, which combines vector
+quantisation with Self-Organising Maps to give the codebook an
+explicit spatial structure: tokens that are close together represent
+similar postures. This turns the codebook into a navigable map of
+movement, and that structure is what makes real human-in-the-loop
+interaction possible — a dancer can steer the system by moving
+through the map, diverging from a reference, exploring nearby
+regions, or returning toward a target. Control is not an add-on; it
+grows out of how the space is organised.</p>
+</div>
+          <figure class="fig">
+            <img src="/assets/research/video_som.gif"
+                 alt="Quantising the body" loading="lazy">
+          </figure>
+        </div>
+        <div class="subblock">
+          <h3>The generative model</h3>
+          <div class="prose"><p>Built on top of the quantised representation, the generative core is
+an autoregressive model that produces movement token by token,
+conditioning each output on both the history of past states and the
+live input from the performer.</p>
+
+<p>The critical requirement is real-time generation: the system must
+produce new movement at every step, not replay cached sequences, and
+fast enough to sustain unbroken interaction.</p>
+</div>
+        </div>
+        <div class="subblock">
+          <h3>Divergence as dialogue</h3>
+          <div class="prose"><p>The spatial gap between where the machine is and where the performer
+is, is not an error — it is the creative distance the system
+navigates. Proximity is enforced by the topology of the map rather
+than by rules, continuously re-anchoring generation toward the
+human.</p>
+</div>
+          <div class="pair">
+            <figure class="fig">
+              <img src="/assets/research/som1.png"
+                   alt="Superficie di attivazione della SOM con la zona di campionamento" loading="lazy">
+              <figcaption>SOM activation surface — brightness is proximity to the performer's pose.
+              </figcaption>
+            </figure>
+            <figure class="fig">
+              <img src="/assets/research/som2.png"
+                   alt="Probabilità di campionamento del transformer nella stessa zona" loading="lazy">
+              <figcaption>Next-token probabilities, restricted to the same zone.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><section class="band" id="staying-open">
+  <div class="wrap">
+
+    <div class="band-head">
+      <h2>Staying open</h2>
+      <span class="hairline"></span><span class="band-tag">Theory</span>
+    </div><div class="">
+      <div class="split-main">
+        <div class="prose"><p>Generative models are remarkably good at compressing and reproducing the
+world, but every time they do they risk losing part of their diversity.
+Trained recursively on their own synthetic output, they progressively
+lose diversity and degrade — what is now called model collapse.</p>
+
+<p>We found the problem runs deeper than architecture or scale. When a
+model is trained on a finite set of examples through repeated
+resampling, collapse eventually becomes inevitable. We identified the
+iteration at which some of the original diversity disappears
+irreversibly, and call it the extinction threshold.</p>
+</div>
+        <div class="subblock">
+          <h3>Recursion as the cure</h3>
+          <div class="prose"><p>The problem is not recursion in itself — it is passive recursion.
+Dreaming Learning uses the model’s own synthetic output during
+training, but to generate trajectories that maximise exploration
+while remaining anchored to the real distribution. Synthetic data
+becomes a controlled exploratory mechanism rather than a cheap
+substitute for real data.</p>
+
+<p>Alongside it, Lyapunov Learning at the Onset of Chaos trains models
+to operate between rigidity and noise — the regime where a system is
+both sensitive and structured.</p>
+</div>
+        </div>
+        <div class="subblock">
+          <h3>Why this matters for a dancer</h3>
+          <div class="prose"><p>A system that learns only from one person risks becoming a mirror:
+increasingly faithful, increasingly useless. This is model collapse
+at a personal scale — not the loss of diversity across a population,
+but the loss of the capacity to surprise. Dreaming Learning is the
+mechanism that lets the system know a body deeply and, from that
+knowledge, still offer a movement it has never tried.</p>
+</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><section class="band tint" id="beyond-the-stage">
+  <div class="wrap">
+
+    <div class="band-head">
+      <h2>Beyond the stage</h2>
+      <span class="hairline"></span><span class="band-tag">Outlook</span>
+    </div><div class="split flip">
+      <div class="split-main">
+        <div class="prose"><p>Everything built for the dancer applies to any body in motion: a gym, a
+rehabilitation studio, a training field. A system that observes not how
+an ideal athlete moves, nor how a statistical average moves, but how you
+move — your habits, your asymmetries, your recurring patterns — and
+keeps learning session after session.</p>
+
+<p>The architecture built for dance is not a dance architecture. It is an
+architecture for any body, in any domain, with any tolerance for
+variation: the same logic, calibrated differently.</p>
+</div>
+      </div>
+      <figure class="fig split-side">
+        <ul class="collage">
+          <li><img src="/assets/research/sport.jpg"
+                   alt="Un tennista a metà servizio" loading="lazy"></li>
+          <li><img src="/assets/research/cuisine.jpg"
+                   alt="Mani che emulsionano una salsa" loading="lazy"></li>
+          <li><img src="/assets/research/rehab.jpg"
+                   alt="Una sessione di riabilitazione motoria" loading="lazy"></li>
+          <li><img src="/assets/research/npc.jpg"
+                   alt="Personaggi non giocanti in un videogioco" loading="lazy"></li>
+        </ul>
+      </figure>
+
+    </div>
+
+  </div>
+</section><section class="band" id="performances">
+  <div class="wrap">
+
+    <div class="band-head">
+      <h2>Live performances</h2>
+      <span class="hairline"></span><span class="band-tag">Live</span>
+    </div><div class="split">
+      <div class="split-main">
+        <div class="prose"><p>Duetto made its first public appearance at the IntelligentIA event
+through two live performances designed as a progressive experiment.</p>
+
+<p>The first started in fully synchronous mode, the digital skeleton
+mirroring the dancer in real time, before a temporal delay was gradually
+introduced and a visible misalignment opened between the two bodies. The
+second shifted from synchrony into full generative mode, where the
+skeleton began to propose movement rather than follow it.</p>
+
+<p>Together they mapped the project’s research trajectory — from imitation
+to interaction — functioning at once as artistic statement and as
+experimental demonstration of the system’s capacity to move between
+operational modes.</p>
+</div>
+      </div>
+      <figure class="fig split-side">
+        <img src="/assets/research/live_perf.gif"
+             alt="Una danzatrice in scena accanto alla proiezione del suo scheletro digitale" loading="lazy">
+      </figure>
+
+    </div>
+
+  </div>
 </section>
-
   </main><footer class="wrap colophon">
   <span>&copy; 2026 Duetto</span>
   <span>

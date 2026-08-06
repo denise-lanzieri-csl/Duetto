@@ -4,25 +4,120 @@ title: Research
 permalink: /research/
 heading: Research
 lede: >-
-  One or two sentences framing the whole programme, so the reader knows what the
-  directions below have in common.
-description: Research directions of the group.
+  We build systems that explore rather than reproduce. Duetto is where that
+  question meets the human body — a real-time dialogue between a dancer and a
+  generative model.
+description: The research behind Duetto, from the Large Movement Model to live performance.
 ---
 
-<section class="wrap band">
-  {%- for item in site.data.research %}
-  <article class="entry" id="{{ item.id }}">
-    <div>
-      <span class="tag">{{ item.tag }}</span>
+{%- comment -%}
+  Indice ancorato: si costruisce da solo dalle sezioni di _data/research.yml
+{%- endcomment -%}
+<nav class="toc" aria-label="On this page">
+  <p class="toc-title">What's on this page</p>
+  <ol>
+    {%- for item in site.data.research %}
+    <li><a href="#{{ item.id }}">{{ item.title }}</a></li>
+    {%- endfor %}
+  </ol>
+</nav>
+
+{%- for item in site.data.research %}
+{%- comment -%}
+  I tipi di media accettati stanno elencati qui una volta sola: image,
+  video, gallery. Per aggiungerne uno, basta toccare questa riga.
+{%- endcomment -%}
+{%- assign has_media = false -%}
+{%- if item.image or item.video or item.gallery %}{% assign has_media = true %}{% endif -%}
+
+<section class="band{% cycle '', ' tint' %}" id="{{ item.id }}">
+  <div class="wrap">
+
+    <div class="band-head">
       <h2>{{ item.title }}</h2>
+      <span class="hairline"></span>
+      {%- if item.tag %}<span class="band-tag">{{ item.tag }}</span>{% endif %}
     </div>
-    <div>
-      {{ item.body | markdownify }}
-      <p class="meta">
-        <a href="{{ '/publications/' | relative_url }}">Related papers</a>
-        &middot; <a href="{{ '/code/' | relative_url }}">Code</a>
-      </p>
+
+    {%- comment -%}
+      `layout: centered` -> colonna unica al centro, nessun affiancamento.
+      Altrimenti, con un media, testo e figura vanno affiancati; con
+      `side: left` la figura passa a sinistra.
+    {%- endcomment -%}
+    <div class="{% if item.layout == 'centered' %}centered{% elsif has_media %}split{% if item.side == 'left' %} flip{% endif %}{% endif %}">
+      <div class="split-main">
+        <div class="prose">{{ item.body | markdownify }}</div>
+
+        {%- for b in item.blocks %}
+        <div class="subblock">
+          <h3>{{ b.heading }}</h3>
+          <div class="prose">{{ b.body | markdownify }}</div>
+
+          {%- comment -%}
+            `images:` (al plurale) mette due o più figure affiancate.
+            `image:` (al singolare) ne mette una sola a tutta larghezza.
+          {%- endcomment -%}
+          {%- if b.images %}
+          <div class="pair">
+            {%- for im in b.images %}
+            <figure class="fig">
+              <img src="{{ '/assets/research/' | append: im.image | relative_url }}"
+                   alt="{{ im.alt | default: '' }}" loading="lazy">
+              {%- if im.caption or im.credit %}
+              <figcaption>
+                {%- if im.caption %}{{ im.caption }}{% endif %}
+                {%- if im.credit %}<span class="credit-line">{{ im.credit }}</span>{% endif %}
+              </figcaption>
+              {%- endif %}
+            </figure>
+            {%- endfor %}
+          </div>
+
+          {%- elsif b.image %}
+          <figure class="fig">
+            <img src="{{ '/assets/research/' | append: b.image | relative_url }}"
+                 alt="{{ b.image_alt | default: '' }}" loading="lazy">
+            {%- if b.caption or b.credit %}
+            <figcaption>
+              {%- if b.caption %}{{ b.caption }}{% endif %}
+              {%- if b.credit %}<span class="credit-line">{{ b.credit }}</span>{% endif %}
+            </figcaption>
+            {%- endif %}
+          </figure>
+          {%- endif %}
+        </div>
+        {%- endfor %}
+      </div>
+
+      {%- if has_media and item.layout != 'centered' %}
+      <figure class="fig split-side">
+        {%- if item.gallery %}
+        <ul class="collage">
+          {%- for g in item.gallery %}
+          <li><img src="{{ '/assets/research/' | append: g.image | relative_url }}"
+                   alt="{{ g.alt | default: '' }}" loading="lazy"></li>
+          {%- endfor %}
+        </ul>
+        {%- elsif item.video %}
+        <video src="{{ '/assets/research/' | append: item.video | relative_url }}"
+               {% if item.poster %}poster="{{ '/assets/research/' | append: item.poster | relative_url }}"{% endif %}
+               autoplay muted loop playsinline preload="metadata"
+               aria-label="{{ item.image_alt | default: '' }}"></video>
+        {%- else %}
+        <img src="{{ '/assets/research/' | append: item.image | relative_url }}"
+             alt="{{ item.image_alt | default: '' }}" loading="lazy">
+        {%- endif %}
+        {%- if item.caption or item.credit %}
+        <figcaption>
+          {%- if item.caption %}{{ item.caption }}{% endif %}
+          {%- if item.credit %}<span class="credit-line">{{ item.credit }}</span>{% endif %}
+        </figcaption>
+        {%- endif %}
+      </figure>
+      {%- endif %}
+
     </div>
-  </article>
-  {%- endfor %}
+
+  </div>
 </section>
+{%- endfor %}
