@@ -133,8 +133,8 @@
         time.
 
     - heading: Quantising the body
-      image: video_som.gif
-      image_alt:  Quantising the body
+      video: video_som.mp4
+      video_alt:  Quantising the body
       body: |
         Raw joint coordinates must be transformed into a discrete vocabulary
         a generative model can process. The choice of quantisation framework
@@ -251,8 +251,8 @@
   tag: Live
   title: Live performances
   side: left
-  image: live_perf.gif
-  image_alt: Una danzatrice in scena accanto alla proiezione del suo scheletro digitale
+  video: live_perf.mp4
+  video_alt: Una danzatrice in scena accanto alla proiezione del suo scheletro digitale
 
   summary: >-
     Duetto's first public appearance, staged as a progressive experiment in
