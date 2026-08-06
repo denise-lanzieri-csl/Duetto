@@ -1,0 +1,27 @@
+{%- comment -%}
+  One card in the events index. The whole card is a link to the event page.
+  Called as:  {% include event-card.html e=e %}
+{%- endcomment -%}
+<a class="event" href="{{ include.e.url | relative_url }}">
+
+  <span class="event-when">
+    <span class="day">{{ include.e.day }}</span>
+    <span class="month">{{ include.e.month }}</span>
+  </span>
+
+  {%- if include.e.location %}
+  <span class="event-where">{{ include.e.location }}</span>
+  {%- endif %}
+
+  {%- if include.e.image %}
+  <img class="event-img{% if include.e.image_is_logo %} is-logo{% endif %}"
+       src="{{ '/assets/events/' | append: include.e.image | relative_url }}"
+       alt="" loading="lazy">
+  {%- endif %}
+
+  <span class="event-title">{{ include.e.title }}</span>
+  {%- if include.e.preview %}
+  <span class="event-preview">{{ include.e.preview }}</span>
+  {%- endif %}
+
+</a>

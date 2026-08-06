@@ -1,0 +1,49 @@
+# ============================================================
+# PLAYGROUND — one entry per creativity level, in order.
+#
+# The slider maps straight onto this list: first entry is the
+# leftmost position, last entry the rightmost. Add or remove
+# entries and the slider adjusts itself.
+#
+# `video`   file in assets/playground/ (mp4, muted, looping)
+# `poster`  optional still, shown before the video loads
+# `label`   short name under the slider
+# `caption` one or two lines describing what happens at this level
+# ============================================================
+
+- label: Mirror
+  video: creativity-0.mp4
+  poster: creativity-0.jpg
+  caption: >-
+    The system reproduces the performer's movement almost exactly. Faithful,
+    and with nothing to offer back.
+
+- label: Low
+  video: creativity-1.mp4
+  caption: >-
+    Small deviations appear. The generated body stays close, but no longer
+    lands on the same postures.
+
+- label: Moderate
+  video: creativity-2.mp4
+  caption: >-
+    The system starts proposing transitions the performer did not make,
+    while keeping the overall phrasing recognisable.
+
+- label: High
+  video: creativity-3.mp4
+  caption: >-
+    Generation moves further across the map. Shared rhythm remains, but the
+    sequences diverge.
+
+- label: Very high
+  video: creativity-4.mp4
+  caption: >-
+    The two bodies hold only a loose relationship. What the system proposes
+    is largely its own.
+
+- label: Unanchored
+  video: creativity-5.mp4
+  caption: >-
+    Without the pull back toward the performer, movement drifts into
+    incoherence. The dialogue breaks.

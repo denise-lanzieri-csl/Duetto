@@ -1,0 +1,55 @@
+# ============================================================
+# FEATURED CONTENT — the grid on the home page.
+#
+# A hand-picked selection, not an automatic mirror of the research
+# sections: add, remove and reorder freely. Six or nine entries fill
+# the three-column grid cleanly; seven or eight leave a gap.
+#
+# `tag`   short label above the title
+# `title` the link text
+# `url`   internal path (wrapped in relative_url by the template)
+#         or a full https:// address for external links
+# `text`  one or two lines
+# ============================================================
+
+- tag: Application
+  title: Duetto
+  url: /research/#duetto
+  text: >-
+    A real-time generative system that follows a dancer's movement, learns
+    from it, and proposes alternative trajectories in return.
+
+- tag: Method
+  title: How it works
+  url: /research/#how-it-works
+  text: >-
+    From video to tokens to real-time generation — the pipeline behind the
+    live dialogue.
+
+- tag: Live
+  title: Duetto on stage
+  url: /events/
+  text: >-
+    Performances, installations and talks — where the project meets its
+    audience.
+
+- tag: Foundations
+  title: Why movement
+  url: /research/#why-movement
+  text: >-
+    The body is concrete enough to measure and open-ended enough to be
+    genuinely creative — a demanding testbed for exploratory AI.
+
+- tag: Events
+  title: Outreach
+  url: /events/
+  text: >-
+    From the first public appearance at IntelligentIA to theGATE Festival in
+    Stuttgart — performances, installations and talks.
+
+- tag: Duetto playground
+  title: Duetto playground
+  url: /playground/
+  text: >-
+    The architecture built for dance is not a dance architecture — it works
+    for any body, in any domain.

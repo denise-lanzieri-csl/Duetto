@@ -9,14 +9,17 @@
 
   <main>
     {%- comment -%}
-      Se la pagina ha `heading` nel front matter, stampiamo
-      l'intestazione standard. La home non ce l'ha e usa il suo layout.
+      Pages with `heading` in their front matter get the standard header.
+      The home page has none and uses its own layout.
+      Add `dark_head: true` for the dark banner used on event pages.
     {%- endcomment -%}
     {%- if page.heading %}
-    <section class="wrap pagehead">
-      <h1>{{ page.heading }}</h1>
-      {%- if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
-    </section>
+    <div class="pagehead-wrap{% if page.dark_head %} is-dark{% endif %}">
+      <section class="wrap pagehead">
+        <h1>{{ page.heading }}</h1>
+        {%- if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+      </section>
+    </div>
     {%- endif %}
 
     {{ content }}

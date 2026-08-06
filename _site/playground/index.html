@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Playground — Duetto</title>
+
+<meta name="description" content="An interactive look at how creativity shapes what Duetto generates.">
+<meta property="og:title" content="Playground">
+<meta property="og:description" content="An interactive look at how creativity shapes what Duetto generates.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://localhost:4000/playground/">
+<link rel="canonical" href="http://localhost:4000/playground/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Roboto+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body><header class="masthead" id="masthead">
+  <div class="wrap masthead-inner">
+    <a class="wordmark" href="/">DUETTO</a>
+    <nav class="navlinks" aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/research/">Research</a>
+      <a href="/team/">Team</a>
+      <a href="/events/">Events</a>
+      <a href="/playground/" aria-current="page">Playground</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+    <div class="pagehead-wrap">
+      <section class="wrap pagehead">
+        <h1>Duetto playground</h1><p class="lede">One dial, six settings. Move it and watch how far the system is allowed to wander from the body it is listening to.</p>
+      </section>
+    </div>
+
+    <section class="band">
+  <div class="wrap pg"><div class="pg-stage">
+      <video class="pg-video is-active"
+             data-index="0"
+             src="/assets/playground/creativity-0.mp4"
+             data-src="/assets/playground/creativity-0.mp4"
+             poster="/assets/playground/creativity-0.jpg"
+             muted loop playsinline preload="auto"
+             aria-hidden="false"></video>
+      <video class="pg-video"
+             data-index="1"
+             
+             data-src="/assets/playground/creativity-1.mp4"
+             
+             muted loop playsinline preload="none"
+             aria-hidden="true"></video>
+      <video class="pg-video"
+             data-index="2"
+             
+             data-src="/assets/playground/creativity-2.mp4"
+             
+             muted loop playsinline preload="none"
+             aria-hidden="true"></video>
+      <video class="pg-video"
+             data-index="3"
+             
+             data-src="/assets/playground/creativity-3.mp4"
+             
+             muted loop playsinline preload="none"
+             aria-hidden="true"></video>
+      <video class="pg-video"
+             data-index="4"
+             
+             data-src="/assets/playground/creativity-4.mp4"
+             
+             muted loop playsinline preload="none"
+             aria-hidden="true"></video>
+      <video class="pg-video"
+             data-index="5"
+             
+             data-src="/assets/playground/creativity-5.mp4"
+             
+             muted loop playsinline preload="none"
+             aria-hidden="true"></video>
+      <button class="pg-toggle" id="pg-toggle" type="button" aria-label="Pause">&#9612;&#9612;</button>
+    </div>
+
+    <div class="pg-controls">
+      <label class="field" for="pg-slider">Creativity</label>
+      <input type="range" id="pg-slider"
+             min="0" max="5" step="1" value="0"
+             aria-describedby="pg-caption">
+
+      <ol class="pg-ticks" aria-hidden="true">
+        <li data-index="0" class="is-active">Mirror</li>
+        <li data-index="1">Low</li>
+        <li data-index="2">Moderate</li>
+        <li data-index="3">High</li>
+        <li data-index="4">Very high</li>
+        <li data-index="5">Unanchored</li>
+      </ol>
+    </div>
+
+    <p class="pg-caption" id="pg-caption" role="status">
+      The system reproduces the performer's movement almost exactly. Faithful, and with nothing to offer back.
+    </p>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var slider   = document.getElementById('pg-slider');
+  var toggle   = document.getElementById('pg-toggle');
+  var videos   = Array.prototype.slice.call(document.querySelectorAll('.pg-video'));
+  var ticks    = Array.prototype.slice.call(document.querySelectorAll('.pg-ticks li'));
+  var caption  = document.getElementById('pg-caption');
+  var captions = ["The system reproduces the performer's movement almost exactly. Faithful, and with nothing to offer back.","Small deviations appear. The generated body stays close, but no longer lands on the same postures.","The system starts proposing transitions the performer did not make, while keeping the overall phrasing recognisable.","Generation moves further across the map. Shared rhythm remains, but the sequences diverge.","The two bodies hold only a loose relationship. What the system proposes is largely its own.","Without the pull back toward the performer, movement drifts into incoherence. The dialogue breaks."];
+  if (!slider || !videos.length) return;
+
+  // Space the labels the way the slider spaces its thumb: evenly from
+  // 0% to 100%, with the container inset by half a thumb on each side.
+  ticks.forEach(function (t, n) {
+    t.style.left = (n / (ticks.length - 1) * 100) + '%';
+  });
+
+  var paused = false;
+
+  function show(i) {
+    var next = videos[i];
+    if (!next) return;
+
+    // Load on first use, then keep it around
+    if (!next.getAttribute('src')) {
+      next.setAttribute('src', next.dataset.src);
+      next.preload = 'auto';
+    }
+
+    videos.forEach(function (v) {
+      var on = v === next;
+      // Carry the playback position over, so the body does not jump
+      if (on && !v.classList.contains('is-active')) {
+        var from = videos.find(function (x) { return x.classList.contains('is-active'); });
+        if (from && from.duration && v.duration) {
+          try { v.currentTime = from.currentTime % v.duration; } catch (e) {}
+        }
+      }
+      v.classList.toggle('is-active', on);
+      v.setAttribute('aria-hidden', on ? 'false' : 'true');
+      if (on) { if (!paused) v.play().catch(function(){}); } else { v.pause(); }
+    });
+
+    ticks.forEach(function (t, n) { t.classList.toggle('is-active', n === i); });
+    caption.textContent = captions[i];
+  }
+
+  slider.addEventListener('input', function () { show(parseInt(this.value, 10)); });
+
+  ticks.forEach(function (t, n) {
+    t.addEventListener('click', function () { slider.value = n; show(n); });
+  });
+
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      paused = !paused;
+      var active = videos.find(function (v) { return v.classList.contains('is-active'); });
+      if (!active) return;
+      if (paused) { active.pause(); } else { active.play().catch(function(){}); }
+      toggle.innerHTML = paused ? '&#9654;' : '&#9612;&#9612;';
+      toggle.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+    });
+  }
+
+  // Honour the reduced-motion setting: start paused on the poster
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    paused = true;
+    toggle.innerHTML = '&#9654;';
+    toggle.setAttribute('aria-label', 'Play');
+  } else {
+    videos[0].play().catch(function(){});
+  }
+})();
+</script>
+  </main><footer class="wrap colophon">
+  <span>&copy; 2026 Duetto</span>
+  <span>
+    <a href="/contact/">Contact</a> &middot; <a href="https://github.com/denise-lanzieri-csl">GitHub</a>
+  </span>
+</footer>
+</body>
+</html>

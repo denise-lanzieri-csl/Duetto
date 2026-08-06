@@ -12,7 +12,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Roboto+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body><header class="masthead" id="masthead">
@@ -22,16 +22,18 @@
       <a href="/">Home</a>
       <a href="/research/" aria-current="page">Research</a>
       <a href="/team/">Team</a>
-      <a href="/publications/">Publications</a>
-      <a href="/code/">Code</a>
+      <a href="/events/">Events</a>
+      <a href="/playground/">Playground</a>
       <a href="/contact/">Contact</a>
     </nav>
   </div>
 </header>
 <main>
-    <section class="wrap pagehead">
-      <h1>Research</h1><p class="lede">We build systems that explore rather than reproduce. Duetto is where that question meets the human body — a real-time dialogue between a dancer and a generative model.</p>
-    </section>
+    <div class="pagehead-wrap">
+      <section class="wrap pagehead">
+        <h1>Research</h1><p class="lede">We build systems that explore rather than reproduce. Duetto is where that question meets the human body — a real-time dialogue between a dancer and a generative model.</p>
+      </section>
+    </div>
 
     <nav class="toc" aria-label="On this page">
   <p class="toc-title">What's on this page</p>
@@ -169,8 +171,12 @@ movement. From there the model learns to compress and structure that
 data into latent representations, then to generate new movement rather
 than memorise what it has seen.</p>
 </div>
-        <div class="subblock">
-          <h3>Data collection</h3>
+        <details class="subblock acc">
+          <summary>
+            <h3>Data collection</h3>
+            <p class="acc-preview">In the first session we recruited dancers across three experience levels — professional, semi-professional, non-professional — and captured their movement...</p>
+          </summary>
+          <div class="acc-body">
           <div class="prose"><p>In the first session we recruited dancers across three experience
 levels — professional, semi-professional, non-professional — and
 captured their movement across nine musical conditions varying in
@@ -187,17 +193,33 @@ design of the interactive system.</p>
             <img src="/assets/research/DSC00383.JPG"
                  alt="Uno scheletro tracciato in movimento su una griglia" loading="lazy">
           </figure>
-        </div>
-        <div class="subblock">
-          <h3>Pose estimation</h3>
+          </div>
+        </details>
+        <details class="subblock acc">
+          <summary>
+            <h3>Pose estimation</h3>
+            <p class="acc-preview">Movement is captured with sVision, our real-time human pose estimation pipeline, which extracts key anatomical landmarks and represents the body...</p>
+          </summary>
+          <div class="acc-body">
           <div class="prose"><p>Movement is captured with sVision, our real-time human pose
 estimation pipeline, which extracts key anatomical landmarks and
 represents the body as a set of spatial coordinates evolving over
 time.</p>
 </div>
-        </div>
-        <div class="subblock">
-          <h3>Quantising the body</h3>
+          <figure class="fig">
+            <video src="/assets/research/D1_M9_T2_svision.mp4"
+                   
+                   autoplay muted loop playsinline preload="metadata"
+                   aria-label="How sVision tracks a moving body"></video>
+          </figure>
+          </div>
+        </details>
+        <details class="subblock acc">
+          <summary>
+            <h3>Quantising the body</h3>
+            <p class="acc-preview">Raw joint coordinates must be transformed into a discrete vocabulary a generative model can process. The choice of quantisation framework...</p>
+          </summary>
+          <div class="acc-body">
           <div class="prose"><p>Raw joint coordinates must be transformed into a discrete vocabulary
 a generative model can process. The choice of quantisation framework
 determines whether the resulting token space is interpretable and
@@ -218,9 +240,14 @@ grows out of how the space is organised.</p>
             <img src="/assets/research/video_som.gif"
                  alt="Quantising the body" loading="lazy">
           </figure>
-        </div>
-        <div class="subblock">
-          <h3>The generative model</h3>
+          </div>
+        </details>
+        <details class="subblock acc">
+          <summary>
+            <h3>The generative model</h3>
+            <p class="acc-preview">Built on top of the quantised representation, the generative core is an autoregressive model that produces movement token by token,...</p>
+          </summary>
+          <div class="acc-body">
           <div class="prose"><p>Built on top of the quantised representation, the generative core is
 an autoregressive model that produces movement token by token,
 conditioning each output on both the history of past states and the
@@ -230,9 +257,14 @@ live input from the performer.</p>
 produce new movement at every step, not replay cached sequences, and
 fast enough to sustain unbroken interaction.</p>
 </div>
-        </div>
-        <div class="subblock">
-          <h3>Divergence as dialogue</h3>
+          </div>
+        </details>
+        <details class="subblock acc">
+          <summary>
+            <h3>Divergence as dialogue</h3>
+            <p class="acc-preview">The spatial gap between where the machine is and where the performer is, is not an error — it is...</p>
+          </summary>
+          <div class="acc-body">
           <div class="prose"><p>The spatial gap between where the machine is and where the performer
 is, is not an error — it is the creative distance the system
 navigates. Proximity is enforced by the topology of the map rather
@@ -253,7 +285,8 @@ human.</p>
               </figcaption>
             </figure>
           </div>
-        </div>
+          </div>
+        </details>
       </div>
 
     </div>
@@ -265,7 +298,7 @@ human.</p>
     <div class="band-head">
       <h2>Staying open</h2>
       <span class="hairline"></span><span class="band-tag">Theory</span>
-    </div><div class="">
+    </div><div class="split flip">
       <div class="split-main">
         <div class="prose"><p>Generative models are remarkably good at compressing and reproducing the
 world, but every time they do they risk losing part of their diversity.
@@ -303,6 +336,10 @@ knowledge, still offer a movement it has never tried.</p>
 </div>
         </div>
       </div>
+      <figure class="fig split-side">
+        <img src="/assets/research/recursion.jpeg"
+             alt="Recursion" loading="lazy">
+      </figure>
 
     </div>
 
@@ -313,7 +350,7 @@ knowledge, still offer a movement it has never tried.</p>
     <div class="band-head">
       <h2>Beyond the stage</h2>
       <span class="hairline"></span><span class="band-tag">Outlook</span>
-    </div><div class="split flip">
+    </div><div class="split">
       <div class="split-main">
         <div class="prose"><p>Everything built for the dancer applies to any body in motion: a gym, a
 rehabilitation studio, a training field. A system that observes not how
@@ -348,7 +385,7 @@ variation: the same logic, calibrated differently.</p>
     <div class="band-head">
       <h2>Live performances</h2>
       <span class="hairline"></span><span class="band-tag">Live</span>
-    </div><div class="split">
+    </div><div class="split flip">
       <div class="split-main">
         <div class="prose"><p>Duetto made its first public appearance at the IntelligentIA event
 through two live performances designed as a progressive experiment.</p>

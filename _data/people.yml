@@ -1,27 +1,36 @@
 # ============================================================
-# LE PERSONE. Elenco unico, senza gruppi.
-# L'ordine qui è l'ordine in cui compaiono nella pagina.
-# La foto va in assets/people/ e deve essere quadrata (600x600 px).
-# subrole e links sono opzionali.
+# THE TEAM — a single flat list, no groups.
+#
+# The order here is the order shown on the page.
+# Photos live in assets/people/ and should be portrait format;
+# the CSS crops them to 3/4.
+#
+# `role`    the person's role in Duetto — shown in bold
+# `subrole` their job title at Sony CSL – Rome — shown lighter
+# `focus`   optional, shifts the crop when a face sits off-centre
+#           (first value is horizontal: lower = further left)
+# `links`   optional list of label/url pairs
 # ============================================================
 
 - name: Prof. Vittorio Loreto PhD
-  role: Director
-  subrole: Co-PI Augmented Creativity
+  role: Scientific mentor
+  subrole: Director, Sony CSL – Rome
   photo: vittorio-loreto.jpg
   focus: 30% center
 
 - name: Alessandro Londei PhD
-  role: Researcher
-  subrole: Co-PI Augmented Creativity
+  role: Project manager
+  subrole: Researcher
   photo: alessandro-londei.jpg
   focus: 40% center
 
 - name: Denise Lanzieri PhD
-  role: Associate Researcher
+  role: Project manager
+  subrole: Associate Researcher
   photo: denise-lanzieri.jpg
 
 - name: Milena Di Canio
-  role: Corporate Communications and Events Manager
+  role: Cultural and communication manager
+  subrole: Corporate Communications and Events Manager
   photo: milena-dicanio.jpg
   focus: 70% center

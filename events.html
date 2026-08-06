@@ -1,0 +1,40 @@
+---
+layout: default
+title: Events
+permalink: /events/
+heading: Events &amp; outreach
+lede: >-
+  Where Duetto meets its audience — festivals, performances, workshops and
+  talks open to the public.
+description: Public events, performances and outreach around the Duetto project.
+---
+
+{%- comment -%}
+  Cards are generated from the _events/ collection. Each one links to its
+  own page. Entries flagged `upcoming: true` in the front matter go on top.
+{%- endcomment -%}
+
+{%- assign upcoming = site.events | where: "upcoming", true -%}
+{%- assign past = site.events | where_exp: "e", "e.upcoming != true" -%}
+
+{%- if upcoming.size > 0 %}
+<section class="band" id="upcoming">
+  <div class="wrap">
+    <div class="band-head"><h2>Upcoming</h2><span class="hairline"></span></div>
+    <div class="events">
+      {%- for e in upcoming %}{% include event-card.html e=e %}{% endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if past.size > 0 %}
+<section class="band tint" id="past">
+  <div class="wrap">
+    <div class="band-head"><h2>Past events</h2><span class="hairline"></span></div>
+    <div class="events">
+      {%- for e in past %}{% include event-card.html e=e %}{% endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}

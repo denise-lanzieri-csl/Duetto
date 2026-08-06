@@ -1,0 +1,126 @@
+---
+layout: default
+title: Playground
+permalink: /playground/
+dark_head: false
+heading: Duetto playground
+lede: >-
+  One dial, six settings. Move it and watch how far the system is allowed to
+  wander from the body it is listening to.
+description: An interactive look at how creativity shapes what Duetto generates.
+---
+
+<section class="band">
+  <div class="wrap pg">
+
+    {%- comment -%}
+      Every clip is its own <video>. Only the active one is visible and
+      playing; the others load on first selection and then stay ready,
+      so switching back is instant.
+    {%- endcomment -%}
+    <div class="pg-stage">
+      {%- for l in site.data.playground %}
+      <video class="pg-video{% if forloop.first %} is-active{% endif %}"
+             data-index="{{ forloop.index0 }}"
+             {% if forloop.first %}src="{{ '/assets/playground/' | append: l.video | relative_url }}"{% endif %}
+             data-src="{{ '/assets/playground/' | append: l.video | relative_url }}"
+             {% if l.poster %}poster="{{ '/assets/playground/' | append: l.poster | relative_url }}"{% endif %}
+             muted loop playsinline preload="{% if forloop.first %}auto{% else %}none{% endif %}"
+             aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"></video>
+      {%- endfor %}
+      <button class="pg-toggle" id="pg-toggle" type="button" aria-label="Pause">&#9612;&#9612;</button>
+    </div>
+
+    <div class="pg-controls">
+      <label class="field" for="pg-slider">Creativity</label>
+      <input type="range" id="pg-slider"
+             min="0" max="{{ site.data.playground.size | minus: 1 }}" step="1" value="0"
+             aria-describedby="pg-caption">
+
+      <ol class="pg-ticks" aria-hidden="true">
+        {%- for l in site.data.playground %}
+        <li data-index="{{ forloop.index0 }}"{% if forloop.first %} class="is-active"{% endif %}>{{ l.label }}</li>
+        {%- endfor %}
+      </ol>
+    </div>
+
+    <p class="pg-caption" id="pg-caption" role="status">
+      {{ site.data.playground[0].caption }}
+    </p>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var slider   = document.getElementById('pg-slider');
+  var toggle   = document.getElementById('pg-toggle');
+  var videos   = Array.prototype.slice.call(document.querySelectorAll('.pg-video'));
+  var ticks    = Array.prototype.slice.call(document.querySelectorAll('.pg-ticks li'));
+  var caption  = document.getElementById('pg-caption');
+  var captions = {{ site.data.playground | map: "caption" | jsonify }};
+  if (!slider || !videos.length) return;
+
+  // Space the labels the way the slider spaces its thumb: evenly from
+  // 0% to 100%, with the container inset by half a thumb on each side.
+  ticks.forEach(function (t, n) {
+    t.style.left = (n / (ticks.length - 1) * 100) + '%';
+  });
+
+  var paused = false;
+
+  function show(i) {
+    var next = videos[i];
+    if (!next) return;
+
+    // Load on first use, then keep it around
+    if (!next.getAttribute('src')) {
+      next.setAttribute('src', next.dataset.src);
+      next.preload = 'auto';
+    }
+
+    videos.forEach(function (v) {
+      var on = v === next;
+      // Carry the playback position over, so the body does not jump
+      if (on && !v.classList.contains('is-active')) {
+        var from = videos.find(function (x) { return x.classList.contains('is-active'); });
+        if (from && from.duration && v.duration) {
+          try { v.currentTime = from.currentTime % v.duration; } catch (e) {}
+        }
+      }
+      v.classList.toggle('is-active', on);
+      v.setAttribute('aria-hidden', on ? 'false' : 'true');
+      if (on) { if (!paused) v.play().catch(function(){}); } else { v.pause(); }
+    });
+
+    ticks.forEach(function (t, n) { t.classList.toggle('is-active', n === i); });
+    caption.textContent = captions[i];
+  }
+
+  slider.addEventListener('input', function () { show(parseInt(this.value, 10)); });
+
+  ticks.forEach(function (t, n) {
+    t.addEventListener('click', function () { slider.value = n; show(n); });
+  });
+
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      paused = !paused;
+      var active = videos.find(function (v) { return v.classList.contains('is-active'); });
+      if (!active) return;
+      if (paused) { active.pause(); } else { active.play().catch(function(){}); }
+      toggle.innerHTML = paused ? '&#9654;' : '&#9612;&#9612;';
+      toggle.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+    });
+  }
+
+  // Honour the reduced-motion setting: start paused on the poster
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    paused = true;
+    toggle.innerHTML = '&#9654;';
+    toggle.setAttribute('aria-label', 'Play');
+  } else {
+    videos[0].play().catch(function(){});
+  }
+})();
+</script>

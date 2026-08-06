@@ -1,7 +1,14 @@
-#
+# ============================================================
+# SITE-WIDE SETTINGS
+# Restart the local server after changing this file — it is the
+# only one Jekyll does not reload on the fly.
+# ============================================================
+
 title: Duetto
-tagline: Augmented crativity
-description: One sentence describing what the group works on.
+tagline: Augmented creativity
+description: >-
+  A research project on the interaction between artificial intelligence and
+  human movement, led by Sony CSL – Rome.
 
 email: denise.lanzieri@sony.com
 institution: Sony Computer Science Laboratories – Rome
@@ -13,12 +20,34 @@ address_lines:
 github: https://github.com/denise-lanzieri-csl
 scholar: "#"
 
-
+# ------------------------------------------------------------
+# URLs. For a project site (USER.github.io/repo-name):
+#   url:     https://USER.github.io
+#   baseurl: /repo-name        <- must match the repo name exactly, case included
+# For a user or organisation site (USER.github.io):
+#   baseurl: ""
+# ------------------------------------------------------------
 url: "https://denise-lanzieri-csl.github.io"
 baseurl: "/Duetto"
 
+# ------------------------------------------------------------
+# Every file in _events/ becomes its own page at /events/<filename>/
+# ------------------------------------------------------------
+collections:
+  events:
+    output: true
+    permalink: /events/:name/
 
- 
+# Event pages use the `event` layout without having to declare it
+# in each file's front matter.
+defaults:
+  - scope:
+      path: ""
+      type: events
+    values:
+      layout: event
+
+# Kept out of the published site
 exclude:
   - Gemfile
   - Gemfile.lock

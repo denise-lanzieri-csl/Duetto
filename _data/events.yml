@@ -1,0 +1,75 @@
+# ============================================================
+# EVENTS AND PUBLIC OUTREACH
+#
+# `upcoming: true` puts the entry under "Upcoming"; leave it out
+# and it falls under "Past events". Order here is the order shown,
+# so keep the most recent first within each group.
+#
+# `image` lives in assets/events/ and is optional.
+# `preview` is the line visible before the entry is expanded;
+# without it, the first words of `body` are used instead.
+# ============================================================
+
+---
+# One file per event. The filename becomes the URL:
+#   _events/thegate-festival-2026.md  ->  /events/thegate-festival-2026/
+title: Duetto at theGATE Festival 2026
+upcoming: true          # remove this line once the event has passed
+
+date_from: 12 Mar 2026 - 18:00
+date_to: 15 Mar 2026 - 22:00
+location: theGATE Festival
+
+# Shown on the card in the events index
+day: 12
+month: MAR 2026
+image: theGATE-logo-light-v3.png
+image_is_logo: true     # white or transparent logo -> dark frame
+preview: An interactive installation inviting the public to meet a dancing AI.
+
+link: https://example.com/thegate
+link_label: Festival website
+---
+
+As part of theGATE Festival 2026, Duetto will be presented as an exploration
+of the relationship between artificial intelligence and human movement. The
+project resonates strongly with the context of theGATE, a festival dedicated
+to the convergence of science, technology, arts and society, and to the new
+forms of cultural experimentation emerging at their intersections.
+
+Duetto will be accompanied by an interactive installation inviting the public
+to engage directly with a dancing AI. Visitors will not only observe the
+project, but enter a live encounter with it, experiencing movement as a space
+of exchange between human presence and machine interpretation.
+
+By bringing together artistic research, scientific inquiry and technological
+experimentation, Duetto offers an example of how collaborations across
+disciplines can generate new questions, new forms, and new ways of imagining
+the relationship between humans and intelligent systems — approaching the body
+not as something to be reduced to data, but as a living source of knowledge,
+creativity and transformation.
+  
+---
+title: Duetto at IntelligentIA
+date_from: 23 May 2025 - 20:30
+location: IntelligentIA, Rome
+
+day: 23
+month: MAY 2025
+image: IntelligentIA-logo-white.png
+image_is_logo: 
+preview: Two live performances, from mirroring to full generative mode.
+---
+
+Duetto made its first public appearance through two live performances designed
+as a progressive experiment.
+
+The first started in fully synchronous mode, the digital skeleton mirroring the
+dancer in real time, before a temporal delay was gradually introduced and a
+visible misalignment opened between the two bodies. The second shifted from
+synchrony into full generative mode, where the skeleton began to propose
+movement rather than follow it.
+
+Together they mapped the project's research trajectory — from imitation to
+interaction — functioning at once as artistic statement and as experimental
+demonstration of the system's capacity to move between operational modes.

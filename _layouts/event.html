@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  {%- include head.html -%}
+</head>
+<body>
+
+  {%- include nav.html -%}
+
+  <main>
+    {%- comment -%}
+      Title and details share one continuous background, set on .event-head
+    {%- endcomment -%}
+    <div class="event-head">
+
+      <section class="event-hero">
+        <div class="wrap">
+          <h1>{{ page.title }}</h1>
+        </div>
+      </section>
+
+      <section class="event-meta">
+        <div class="wrap event-meta-inner">
+          {%- if page.date_from %}
+          <div>
+            <p class="field">From</p>
+            <p class="value">{{ page.date_from }}</p>
+          </div>
+          {%- endif %}
+          {%- if page.date_to %}
+          <div>
+            <p class="field">To</p>
+            <p class="value">{{ page.date_to }}</p>
+          </div>
+          {%- endif %}
+          {%- if page.location %}
+          <div>
+            <p class="field">Location</p>
+            <p class="value">{{ page.location }}</p>
+          </div>
+          {%- endif %}
+        </div>
+      </section>
+
+    </div>
+
+    <section class="band">
+      <div class="wrap event-page">
+        <div class="prose">{{ content }}</div>
+
+        {%- if page.link %}
+        <p class="links">
+          <a href="{{ page.link }}" target="_blank" rel="noopener">
+            {{ page.link_label | default: "More information" }}
+          </a>
+        </p>
+        {%- endif %}
+
+        {%- comment -%} Optional gallery: `photos:` in the front matter {%- endcomment -%}
+        {%- if page.photos %}
+        <div class="pair">
+          {%- for p in page.photos %}
+          <figure class="fig">
+            <img src="{{ '/assets/events/' | append: p.image | relative_url }}"
+                 alt="{{ p.alt | default: '' }}" loading="lazy">
+            {%- if p.caption %}<figcaption>{{ p.caption }}</figcaption>{% endif %}
+          </figure>
+          {%- endfor %}
+        </div>
+        {%- endif %}
+
+        <p class="back"><a href="{{ '/events/' | relative_url }}">&larr; Back to events</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  {%- include footer.html -%}
+
+</body>
+</html>

@@ -96,6 +96,7 @@
   tag: Method
   title: How it works
   layout: centered
+  collapsible: true
   summary: >-
     From video to tokens to real-time generation — the pipeline behind the
     live dialogue.
@@ -123,6 +124,8 @@
         design of the interactive system.
 
     - heading: Pose estimation
+      video: D1_M9_T2_svision.mp4
+      video_alt: How sVision tracks a moving body
       body: |
         Movement is captured with sVision, our real-time human pose
         estimation pipeline, which extracts key anatomical landmarks and
@@ -178,6 +181,9 @@
 - id: staying-open
   tag: Theory
   title: Staying open
+  side: left
+  image: recursion.jpeg
+  image_alt:  Recursion
   summary: >-
     A system that learns only from you risks becoming a mirror. Dreaming
     Learning is what lets it specialise without closing in.
@@ -218,7 +224,6 @@
 - id: beyond-the-stage
   tag: Outlook
   title: Beyond the stage
-  side: left
   gallery:
     - image: sport.jpg
       alt: Un tennista a metà servizio
@@ -245,6 +250,7 @@
 - id: performances
   tag: Live
   title: Live performances
+  side: left
   image: live_perf.gif
   image_alt: Una danzatrice in scena accanto alla proiezione del suo scheletro digitale
 

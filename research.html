@@ -11,7 +11,7 @@ description: The research behind Duetto, from the Large Movement Model to live p
 ---
 
 {%- comment -%}
-  Indice ancorato: si costruisce da solo dalle sezioni di _data/research.yml
+  Anchored index, built from the sections in _data/research.yml
 {%- endcomment -%}
 <nav class="toc" aria-label="On this page">
   <p class="toc-title">What's on this page</p>
@@ -24,8 +24,8 @@ description: The research behind Duetto, from the Large Movement Model to live p
 
 {%- for item in site.data.research %}
 {%- comment -%}
-  I tipi di media accettati stanno elencati qui una volta sola: image,
-  video, gallery. Per aggiungerne uno, basta toccare questa riga.
+  The accepted media types are listed here once: image, video, gallery.
+  To add another, this is the only line to touch.
 {%- endcomment -%}
 {%- assign has_media = false -%}
 {%- if item.image or item.video or item.gallery %}{% assign has_media = true %}{% endif -%}
@@ -40,24 +40,54 @@ description: The research behind Duetto, from the Large Movement Model to live p
     </div>
 
     {%- comment -%}
-      `layout: centered` -> colonna unica al centro, nessun affiancamento.
-      Altrimenti, con un media, testo e figura vanno affiancati; con
-      `side: left` la figura passa a sinistra.
+      `layout: centered` -> one centred column, nothing set beside it.
+      Otherwise, with a media the text and figure sit side by side, and
+      `side: left` moves the figure to the left.
     {%- endcomment -%}
     <div class="{% if item.layout == 'centered' %}centered{% elsif has_media %}split{% if item.side == 'left' %} flip{% endif %}{% endif %}">
       <div class="split-main">
         <div class="prose">{{ item.body | markdownify }}</div>
 
         {%- for b in item.blocks %}
+        {%- comment -%}
+          With `collapsible: true` on the section, each sub-block becomes an
+          accordion entry: title plus preview, the rest opens on click. The
+          preview comes from the `preview` field, or failing that from the
+          first words of the body.
+        {%- endcomment -%}
+        {%- if item.collapsible %}
+        <details class="subblock acc">
+          <summary>
+            <h3>{{ b.heading }}</h3>
+            <p class="acc-preview">{{ b.preview | default: b.body | strip_html | truncatewords: 20 }}</p>
+          </summary>
+          <div class="acc-body">
+          <div class="prose">{{ b.body | markdownify }}</div>
+        {%- else %}
         <div class="subblock">
           <h3>{{ b.heading }}</h3>
           <div class="prose">{{ b.body | markdownify }}</div>
+        {%- endif %}
 
           {%- comment -%}
-            `images:` (al plurale) mette due o più figure affiancate.
-            `image:` (al singolare) ne mette una sola a tutta larghezza.
+            `video:` a looping clip. `images:` (plural) two or more figures
+            side by side. `image:` (singular) a single full-width figure.
           {%- endcomment -%}
-          {%- if b.images %}
+          {%- if b.video %}
+          <figure class="fig">
+            <video src="{{ '/assets/research/' | append: b.video | relative_url }}"
+                   {% if b.poster %}poster="{{ '/assets/research/' | append: b.poster | relative_url }}"{% endif %}
+                   autoplay muted loop playsinline preload="metadata"
+                   aria-label="{{ b.video_alt | default: '' }}"></video>
+            {%- if b.caption or b.credit %}
+            <figcaption>
+              {%- if b.caption %}{{ b.caption }}{% endif %}
+              {%- if b.credit %}<span class="credit-line">{{ b.credit }}</span>{% endif %}
+            </figcaption>
+            {%- endif %}
+          </figure>
+
+          {%- elsif b.images %}
           <div class="pair">
             {%- for im in b.images %}
             <figure class="fig">
@@ -85,7 +115,12 @@ description: The research behind Duetto, from the Large Movement Model to live p
             {%- endif %}
           </figure>
           {%- endif %}
+        {%- if item.collapsible %}
+          </div>
+        </details>
+        {%- else %}
         </div>
+        {%- endif %}
         {%- endfor %}
       </div>
 
@@ -102,7 +137,7 @@ description: The research behind Duetto, from the Large Movement Model to live p
         <video src="{{ '/assets/research/' | append: item.video | relative_url }}"
                {% if item.poster %}poster="{{ '/assets/research/' | append: item.poster | relative_url }}"{% endif %}
                autoplay muted loop playsinline preload="metadata"
-               aria-label="{{ item.image_alt | default: '' }}"></video>
+               aria-label="{{ item.video_alt | default: item.image_alt | default: '' }}"></video>
         {%- else %}
         <img src="{{ '/assets/research/' | append: item.image | relative_url }}"
              alt="{{ item.image_alt | default: '' }}" loading="lazy">

@@ -1,7 +1,8 @@
 {%- comment -%}
-  Layout della home. Nel front matter di index.md scegli:
-    hero: ruler   -> titolo grande + righello a tacche
-    hero: video   -> video a tutto schermo, menu bianco sovrapposto
+  Home layout. Pick the opening in the front matter of index.md:
+    hero: image   -> full-screen image, white nav on top
+    hero: video   -> full-screen video, white nav on top
+    hero: ruler   -> large headline + tick-mark rule
 {%- endcomment -%}
 {%- assign cinema = false -%}
 {%- if page.hero == "video" or page.hero == "image" -%}{%- assign cinema = true -%}{%- endif -%}
@@ -14,8 +15,8 @@
 <body{% if cinema %} class="cinematic"{% endif %}>
 
   {%- comment -%}
-    Solo la variante video usa il marchio centrato; con l'immagine
-    resta il menu normale, che evidenzia la pagina corrente.
+    Only the video variant uses the centred wordmark. The image variant
+    keeps the regular nav, which highlights the current page.
   {%- endcomment -%}
   {%- if page.hero == "video" -%}
     {%- include nav-centered.html -%}
@@ -27,16 +28,17 @@
 
   {%- if page.hero == "image" %}
     {%- comment -%}
-      Immagine a tutto schermo. Il file va in assets/ e si indica
-      con hero_image nel front matter di index.md.
+      Full-screen image. Put the file in assets/ and point to it with
+      hero_image in the front matter of index.md.
     {%- endcomment -%}
     <section class="filmstrip" id="filmstrip">
       <div class="still-bg" role="img" aria-label="{{ page.hero_alt | default: '' }}"
            style="background-image:url('{{ page.hero_image | default: '/assets/hero.jpg' | relative_url }}')"></div>
 
       {%- comment -%}
-        Testo centrale opzionale: compare solo se in index.md valorizzi
-        hero_title o tagline. Se il logo è già dentro l'immagine, lasciali fuori.
+        Optional centre block: a logo, a title, a tagline. Each one shows
+        up only if set in index.md. If the artwork already carries the
+        logotype, leave them all out.
       {%- endcomment -%}
       {%- if page.hero_logo or page.hero_title or page.tagline %}
       <div class="hero-center">
@@ -94,40 +96,40 @@
       </div>
     </section>
 
-    {%- comment -%} I filoni arrivano da _data/research.yml {%- endcomment -%}
+    {%- comment -%} Featured content, hand-picked in _data/highlights.yml {%- endcomment -%}
     <section class="band tint">
       <div class="wrap">
-        <div class="band-head"><h2>What we work on</h2><span class="hairline"></span></div>
+        <div class="band-head"><h2>Explore</h2><span class="hairline"></span></div>
         <div class="topics">
-          {%- for item in site.data.research %}
+          {%- for h in site.data.highlights %}
           <article class="topic">
-            <span class="tag">{{ item.tag }}</span>
-            <h3><a href="{{ '/research/' | relative_url }}#{{ item.id }}">{{ item.title }}</a></h3>
-            <p>{{ item.summary }}</p>
+            <span class="tag">{{ h.tag }}</span>
+            <h3><a href="{% if h.url contains '://' %}{{ h.url }}{% else %}{{ h.url | relative_url }}{% endif %}">{{ h.title }}</a></h3>
+            <p>{{ h.text }}</p>
           </article>
           {%- endfor %}
         </div>
       </div>
     </section>
 
-    {%- comment -%} Solo le pubblicazioni con featured: true {%- endcomment -%}
-    {%- assign featured = site.data.publications | where: "featured", true -%}
-    {%- if featured.size > 0 %}
+    {%- comment -%}
+      YouTube embeds listed under `videos:` in index.md. Uses the
+      privacy-enhanced domain, which sets no tracking cookies until
+      the visitor actually hits play.
+    {%- endcomment -%}
+    {%- if page.videos %}
     <section class="band">
       <div class="wrap">
-        <div class="band-head"><h2>Recent work</h2><span class="hairline"></span></div>
-        <div class="pubs">
-          {%- for pub in featured %}
-          <article class="pub">
-            <div class="year">{{ pub.kind | default: pub.year }}</div>
-            <div>
-              <h3>{{ pub.title }}</h3>
-              <p class="authors">{{ pub.authors }}{% if pub.venue %} — <em>{{ pub.venue }}</em>{% endif %}</p>
-              {%- if pub.links %}
-              <p class="links">{% for l in pub.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}</p>
-              {%- endif %}
-            </div>
-          </article>
+        <div class="band-head"><h2>Watch</h2><span class="hairline"></span></div>
+        <div class="videos">
+          {%- for v in page.videos %}
+          <figure class="embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/{{ v.id }}"
+                    title="{{ v.title }}" loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+                    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <figcaption>{{ v.title }}</figcaption>
+          </figure>
           {%- endfor %}
         </div>
       </div>
@@ -146,14 +148,14 @@
     var video = document.getElementById('hero-video');
     var btn   = document.getElementById('hero-toggle');
 
-    // La barra diventa opaca quando il video esce dallo schermo
+    // The nav turns solid once the hero scrolls out of view
     if (bar && strip && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (e) {
         bar.classList.toggle('is-solid', !e[0].isIntersecting);
       }, { rootMargin: '-70px 0px 0px 0px' }).observe(strip);
     }
 
-    // Chi ha chiesto meno animazioni vede il fermo immagine
+    // Honour the reduced-motion setting: show the poster, not the video
     if (video && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       video.removeAttribute('autoplay');
       video.pause();

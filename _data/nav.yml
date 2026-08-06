@@ -1,7 +1,7 @@
 # ============================================================
-# IL MENU, IN UN SOLO POSTO.
-# Aggiungi una riga qui e la voce compare su tutte le pagine.
-# `url` deve combaciare col `permalink` della pagina.
+# THE NAVIGATION MENU, IN ONE PLACE.
+# Add a line here and the item shows up on every page.
+# `url` must match the page's `permalink`.
 # ============================================================
 
 - title: Home
@@ -13,11 +13,11 @@
 - title: Team
   url: /team/
 
-- title: Publications
-  url: /publications/
+- title: Events
+  url: /events/
 
-- title: Code
-  url: /code/
+- title: Playground
+  url: /playground/
 
 - title: Contact
   url: /contact/
