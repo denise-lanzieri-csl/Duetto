@@ -809,3 +809,8 @@ html{ scroll-behavior:smooth; }
 .pagehead-wrap.is-dark .pagehead{ border-bottom:0; }
 .pagehead-wrap.is-dark h1{ color:#fff; }
 .pagehead-wrap.is-dark .lede{ color:rgba(255,255,255,.82); }
+
+
+@media (min-width:900px){
+  #about.band .split{ grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); }
+}

@@ -11,6 +11,11 @@ hero_image: /assets/hero-dark.svg
 hero_logo: /assets/DUETTO-02.png
 hero_alt: The Duetto logotype over a dark abstract background
 
+
+about_image: /assets/Duetto_home.jpeg
+about_alt: Alessandra Godi dancing beside the projection of her digital skeleton
+about_caption: Alessandra Godi in the lab at Sony CSL – Rome.
+about_credit: Photo by Milena Di Canio
 # YouTube videos shown in the "Watch" section. `id` is the eleven
 # characters after watch?v= in the URL.
 videos:

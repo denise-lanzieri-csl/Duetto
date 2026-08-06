@@ -79,8 +79,8 @@
       <h1>{{ page.claim }}</h1>
       {%- if page.standfirst %}<p class="standfirst">{{ page.standfirst }}</p>{% endif %}
       <div class="actions">
-        <a class="btn" href="{{ '/publications/' | relative_url }}">Read the papers</a>
-        <a class="btn ghost" href="{{ '/code/' | relative_url }}">Browse the code</a>
+        <a class="btn" href="{{ '/research/' | relative_url }}">Read the research</a>
+        <a class="btn ghost" href="{{ '/playground/' | relative_url }}">Try the playground</a>
       </div>
       <div class="ruler" aria-hidden="true"></div>
       <div class="ruler-labels">
@@ -89,10 +89,29 @@
     </section>
   {%- endif %}
 
+    {%- comment -%}
+      About. With `about_image` set in index.md the text and the picture
+      sit side by side; without it the text keeps the full column.
+    {%- endcomment -%}
     <section class="band" id="about">
-      <div class="wrap">
-        <div class="band-head"><h2>About</h2><span class="hairline"></span></div>
-        <div class="prose">{{ content }}</div>
+      <div class="wrap{% if page.about_image %} split{% endif %}">
+        <div class="split-main">
+          <div class="band-head"><h2>About</h2><span class="hairline"></span></div>
+          <div class="prose">{{ content }}</div>
+        </div>
+
+        {%- if page.about_image %}
+        <figure class="fig split-side">
+          <img src="{{ page.about_image | relative_url }}"
+               alt="{{ page.about_alt | default: '' }}" loading="lazy">
+          {%- if page.about_caption or page.about_credit %}
+          <figcaption>
+            {%- if page.about_caption %}{{ page.about_caption }}{% endif %}
+            {%- if page.about_credit %}<span class="credit-line">{{ page.about_credit }}</span>{% endif %}
+          </figcaption>
+          {%- endif %}
+        </figure>
+        {%- endif %}
       </div>
     </section>
 
