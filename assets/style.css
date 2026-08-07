@@ -784,24 +784,6 @@
        outline:2px solid var(--accent); outline-offset:6px;
      }
      
-  /* Ticks positioned like the slider thumb, which is inset by half its width */
-  .pg-ticks{
-    list-style:none; position:relative; height:1.4em;
-    margin:12px 9px 0; padding:0;
-    font-family:var(--mono); font-size:0.68rem;
-    letter-spacing:0.08em; text-transform:uppercase;
-  }
-  .pg-ticks li{
-    position:absolute; top:0;
-    transform:translateX(-50%);
-    white-space:nowrap;
-    color:var(--muted); cursor:pointer;
-    transition:color .18s ease;
-  }
-  .pg-ticks li:first-child{ transform:none; }
-  .pg-ticks li:last-child{ transform:translateX(-100%); }
-  .pg-ticks li:hover{ color:var(--ink); }
-  .pg-ticks li.is-active{ color:var(--accent); }
   /* ---------- Dark page header, shared with event pages ---------- */
   .pagehead-wrap.is-dark{
     background:var(--ink) url("hero-dark.svg") center/cover no-repeat;
@@ -833,7 +815,7 @@
   body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
   
   @media (max-width:760px){
-    .nav-toggle{ display:grid; }
+    .nav-toggle{ display:grid; place-items:center; align-content:center; }
   
     /* Panel drops from under the bar */
     .navlinks{
@@ -842,12 +824,13 @@
       margin:0; padding:0 var(--gutter);
       background:var(--paper);
       border-bottom:1px solid var(--rule);
-      overflow:hidden;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
       max-height:0; opacity:0;
       transition:max-height .28s ease, opacity .2s ease;
     }
     .masthead.is-open .navlinks{
-      max-height:60vh; opacity:1;
+      max-height:calc(100vh - 64px); opacity:1;
       padding-block:8px 16px;
     }
     .navlinks a{
@@ -879,30 +862,7 @@
   .masthead{ position:sticky; }
   .masthead-inner{ position:relative; }
   
-  /* Six labels never fit on a phone: show only the selected one */
-  @media (max-width:700px){
-    .pg-ticks{ height:auto; margin:14px 0 0; text-align:center; }
-    .pg-ticks li{
-      display:none;
-      position:static; transform:none;
-      font-size:0.72rem; letter-spacing:0.12em;
-    }
-    .pg-ticks li.is-active{ display:block; color:var(--accent); }
    
-    /* The pause button is sized in fixed pixels; scale it down here */
-    .pg-toggle{ width:32px; height:32px; right:12px; bottom:12px; font-size:0.65rem; }
-  }
-   
-  
-  /* Six labels never fit on a phone: show only the selected one. It keeps
-     its absolute position, so it lands right under the slider thumb. */
-     @media (max-width:700px){
-      .pg-ticks li{ display:none; }
-      .pg-ticks li.is-active{ display:block; color:var(--accent); }
-    
-      /* The pause button is sized in fixed pixels; scale it down here */
-      .pg-toggle{ width:32px; height:32px; right:12px; bottom:12px; font-size:0.65rem; }
-    }
   
     /* One portrait per row on phones: two columns make the faces too small */
   @media (max-width:520px){
