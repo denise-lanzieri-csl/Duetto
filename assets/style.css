@@ -814,3 +814,67 @@ html{ scroll-behavior:smooth; }
 @media (min-width:900px){
   #about.band .split{ grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); }
 }
+
+/* ---------- MOBILE MENU ---------- */
+
+/* Hidden on desktop, and out of the tab order with it */
+.nav-toggle{
+  display:none;
+  margin-left:auto;
+  width:40px; height:40px; padding:0;
+  border:0; background:none; cursor:pointer;
+  place-items:center; gap:5px;
+}
+.nav-toggle span{
+  display:block; width:22px; height:1.5px;
+  background:var(--ink);
+  transition:transform .22s ease, opacity .18s ease;
+}
+body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
+
+@media (max-width:760px){
+  .nav-toggle{ display:grid; }
+
+  /* Panel drops from under the bar */
+  .navlinks{
+    position:absolute; left:0; right:0; top:100%;
+    flex-direction:column; align-items:flex-start; gap:0;
+    margin:0; padding:0 var(--gutter);
+    background:var(--paper);
+    border-bottom:1px solid var(--rule);
+    overflow:hidden;
+    max-height:0; opacity:0;
+    transition:max-height .28s ease, opacity .2s ease;
+  }
+  .masthead.is-open .navlinks{
+    max-height:60vh; opacity:1;
+    padding-block:8px 16px;
+  }
+  .navlinks a{
+    width:100%; padding:14px 0;
+    border-bottom:0;
+    font-size:0.9rem;
+  }
+  .navlinks a + a{ border-top:1px solid var(--rule); }
+  .navlinks a[aria-current="page"]{
+    color:var(--accent); border-bottom:0;
+  }
+
+  /* Over the dark hero the bar is transparent, but the open panel
+     needs its own solid background to stay readable */
+  body.cinematic .masthead.is-open{
+    background:color-mix(in srgb, var(--paper) 96%, transparent);
+  }
+  body.cinematic .masthead.is-open .wordmark{ color:var(--ink); }
+  body.cinematic .masthead.is-open .nav-toggle span{ background:var(--ink); }
+  body.cinematic .masthead.is-open .navlinks a{ color:var(--muted); }
+
+  /* Button becomes an X while the panel is open */
+  .masthead.is-open .nav-toggle span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .masthead.is-open .nav-toggle span:nth-child(2){ opacity:0; }
+  .masthead.is-open .nav-toggle span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+}
+
+/* The panel is positioned against the bar */
+.masthead{ position:sticky; }
+.masthead-inner{ position:relative; }

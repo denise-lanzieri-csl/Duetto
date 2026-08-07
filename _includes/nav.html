@@ -1,15 +1,55 @@
 {%- comment -%}
-  Il menu si costruisce da _data/nav.yml. La voce della pagina corrente
-  riceve aria-current="page" da sola: nessun ritocco manuale.
+  The menu is built from _data/nav.yml. The current page gets
+  aria-current="page" on its own, so nothing needs touching by hand.
+
+  Below 760px the links collapse behind a toggle button; above that
+  width the button is hidden and the links sit in a row as usual.
 {%- endcomment -%}
 
 <header class="masthead" id="masthead">
   <div class="wrap masthead-inner">
     <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title | upcase }}</a>
-    <nav class="navlinks" aria-label="Main">
+
+    <button class="nav-toggle" id="nav-toggle" type="button"
+            aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="navlinks" id="nav-links" aria-label="Main">
       {%- for item in site.data.nav %}
       <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
       {%- endfor %}
     </nav>
   </div>
 </header>
+
+<script>
+(function () {
+  var bar = document.getElementById('masthead');
+  var btn = document.getElementById('nav-toggle');
+  if (!bar || !btn) return;
+
+  function setOpen(open) {
+    bar.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+
+  btn.addEventListener('click', function () {
+    setOpen(!bar.classList.contains('is-open'));
+  });
+
+  // Escape closes the panel and puts focus back on the button
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && bar.classList.contains('is-open')) {
+      setOpen(false);
+      btn.focus();
+    }
+  });
+
+  // Anchor links do not reload the page, so close the panel by hand
+  bar.querySelectorAll('.navlinks a').forEach(function (a) {
+    a.addEventListener('click', function () { setOpen(false); });
+  });
+})();
+</script>
