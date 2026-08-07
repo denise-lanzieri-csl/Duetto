@@ -909,3 +909,43 @@ body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
   .people{ grid-template-columns:1fr; gap:32px; }
   .person img{ aspect-ratio:4/5; }
 }
+
+/* ---------- PLAYGROUND STEP LABELS ----------
+   Wide screens: every label sits under its own point on the track. The
+   position comes from --x, set by the script; the 9px side margin is half
+   the slider thumb, which is how the browser insets it at both ends.
+   Narrow screens: six labels cannot fit, so only the active one is shown,
+   on the same line as the "Creativity" label. */
+
+   .pg-ticks{
+    list-style:none; position:relative; height:1.4em;
+    margin:12px 9px 0; padding:0;
+    font-family:var(--mono); font-size:0.68rem;
+    letter-spacing:0.08em; text-transform:uppercase;
+  }
+  .pg-ticks li{
+    position:absolute; top:0; left:var(--x);
+    transform:translateX(-50%); white-space:nowrap;
+    color:var(--muted); cursor:pointer;
+    transition:color .18s ease;
+  }
+  .pg-ticks li:first-child{ transform:none; }
+  .pg-ticks li:last-child{ transform:translateX(-100%); }
+  .pg-ticks li:hover{ color:var(--ink); }
+  .pg-ticks li.is-active{ color:var(--accent); }
+  
+  @media (max-width:700px){
+    .pg-controls{ position:relative; }
+    .pg-ticks{
+      position:absolute; top:0; right:0; left:auto;
+      height:auto; margin:0;
+    }
+    .pg-ticks li{
+      display:none;
+      position:static; transform:none;
+    }
+    .pg-ticks li.is-active{ display:block; color:var(--accent); }
+  
+    /* The pause button is sized in fixed pixels; scale it down here */
+    .pg-toggle{ width:32px; height:32px; right:12px; bottom:12px; font-size:0.65rem; }
+  }

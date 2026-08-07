@@ -61,17 +61,13 @@ description: An interactive look at how creativity shapes what Duetto generates.
   var captions = {{ site.data.playground | map: "caption" | jsonify }};
   if (!slider || !videos.length) return;
 
-  // Labels are spaced the way the browser spaces the slider thumb: evenly
-  // from 0% to 100%, in a container inset by half a thumb on each side.
-  // On narrow screens the CSS hides all but the active one, which then
-  // sits directly under the thumb.
-  function placeTicks() {
-    ticks.forEach(function (t, n) {
-      t.style.left = (n / (ticks.length - 1) * 100) + '%';
-    });
-  }
-  placeTicks();
-  window.addEventListener('resize', placeTicks);
+  // Each label gets its share of the track as a custom property, not as an
+  // inline `left`. An inline style would beat every stylesheet rule, so the
+  // mobile layout could never override it; a variable leaves the CSS free to
+  // use it on wide screens and ignore it on narrow ones.
+  ticks.forEach(function (t, n) {
+    t.style.setProperty('--x', (n / (ticks.length - 1) * 100) + '%');
+  });
 
   var paused = false;
 
