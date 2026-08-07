@@ -878,3 +878,14 @@ body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
 /* The panel is positioned against the bar */
 .masthead{ position:sticky; }
 .masthead-inner{ position:relative; }
+
+/* On narrow screens six labels cannot fit: show only the active one */
+@media (max-width:700px){
+  .pg-ticks{ height:auto; margin:14px 0 0; text-align:center; }
+  .pg-ticks li{
+    display:none;
+    position:static; transform:none;
+    font-size:0.72rem; letter-spacing:0.12em;
+  }
+  .pg-ticks li.is-active{ display:block; color:var(--accent); }
+}

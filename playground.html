@@ -63,9 +63,14 @@ description: An interactive look at how creativity shapes what Duetto generates.
 
   // Space the labels the way the slider spaces its thumb: evenly from
   // 0% to 100%, with the container inset by half a thumb on each side.
-  ticks.forEach(function (t, n) {
-    t.style.left = (n / (ticks.length - 1) * 100) + '%';
-  });
+  function placeTicks() {
+    var wide = window.matchMedia('(min-width:701px)').matches;
+    ticks.forEach(function (t, n) {
+      t.style.left = wide ? (n / (ticks.length - 1) * 100) + '%' : '';
+    });
+  }
+  placeTicks();
+  window.addEventListener('resize', placeTicks);
 
   var paused = false;
 
