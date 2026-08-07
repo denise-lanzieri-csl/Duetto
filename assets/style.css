@@ -602,14 +602,14 @@
     color:var(--muted); margin-top:10px; max-width:60ch;
   }
   
-  /* Photo credit below a figure */
-  .fig figcaption .credit-line{
-    display:block;
-    font-family:var(--mono); font-style:normal;
-    font-size:0.68rem; letter-spacing:0.08em;
-    text-transform:uppercase; color:var(--muted);
-    margin-top:6px;
-  }
+ /* Credit line — works inside a figure, an embed, anywhere */
+ .credit-line{
+  display:block;
+  font-family:var(--mono); font-style:normal;
+  font-size:0.68rem; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--muted);
+  margin-top:6px;
+}
   
   /* Section with side media: text left, figure right */
   .split{ display:grid; gap:28px; }

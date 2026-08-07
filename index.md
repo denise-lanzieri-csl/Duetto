@@ -26,6 +26,7 @@ videos:
   - id: VPBUqFyypLE
     title: "Duetto — Human movement and AI · Full documentary"
     credit: Film by Elena Pisoni
+    
 
 # Only used by `hero: ruler`
 claim: A short line that says what you actually build.
