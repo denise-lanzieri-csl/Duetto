@@ -956,3 +956,7 @@
     color:var(--muted);
     order:3;
   }
+
+  /* Video on a white background: multiply drops the white and keeps the rest,
+   so the clip sits on the page colour instead of inside a white box */
+.fig video.on-white{ mix-blend-mode:multiply; }

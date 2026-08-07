@@ -125,6 +125,7 @@
 
     - heading: Pose estimation
       video: D1_M9_T2_svision.mp4
+      video_on_white: true
       video_alt: How sVision tracks a moving body
       body: |
         Movement is captured with sVision, our real-time human pose

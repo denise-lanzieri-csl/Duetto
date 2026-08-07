@@ -72,10 +72,13 @@ description: The research behind Duetto, from the Large Movement Model to live p
           {%- comment -%}
             `video:` a looping clip. `images:` (plural) two or more figures
             side by side. `image:` (singular) a single full-width figure.
+            Add `video_on_white: true` (or `image_on_white`) when the file
+            has a white background that should blend into the page.
           {%- endcomment -%}
           {%- if b.video %}
           <figure class="fig">
-            <video src="{{ '/assets/research/' | append: b.video | relative_url }}"
+            <video class="{% if b.video_on_white %}on-white{% endif %}"
+                   src="{{ '/assets/research/' | append: b.video | relative_url }}"
                    {% if b.poster %}poster="{{ '/assets/research/' | append: b.poster | relative_url }}"{% endif %}
                    autoplay muted loop playsinline preload="metadata"
                    aria-label="{{ b.video_alt | default: '' }}"></video>
@@ -91,7 +94,8 @@ description: The research behind Duetto, from the Large Movement Model to live p
           <div class="pair">
             {%- for im in b.images %}
             <figure class="fig">
-              <img src="{{ '/assets/research/' | append: im.image | relative_url }}"
+              <img class="{% if im.on_white %}on-white{% endif %}"
+                   src="{{ '/assets/research/' | append: im.image | relative_url }}"
                    alt="{{ im.alt | default: '' }}" loading="lazy">
               {%- if im.caption or im.credit %}
               <figcaption>
@@ -105,7 +109,8 @@ description: The research behind Duetto, from the Large Movement Model to live p
 
           {%- elsif b.image %}
           <figure class="fig">
-            <img src="{{ '/assets/research/' | append: b.image | relative_url }}"
+            <img class="{% if b.image_on_white %}on-white{% endif %}"
+                 src="{{ '/assets/research/' | append: b.image | relative_url }}"
                  alt="{{ b.image_alt | default: '' }}" loading="lazy">
             {%- if b.caption or b.credit %}
             <figcaption>
@@ -134,12 +139,14 @@ description: The research behind Duetto, from the Large Movement Model to live p
           {%- endfor %}
         </ul>
         {%- elsif item.video %}
-        <video src="{{ '/assets/research/' | append: item.video | relative_url }}"
+        <video class="{% if item.video_on_white %}on-white{% endif %}"
+               src="{{ '/assets/research/' | append: item.video | relative_url }}"
                {% if item.poster %}poster="{{ '/assets/research/' | append: item.poster | relative_url }}"{% endif %}
                autoplay muted loop playsinline preload="metadata"
                aria-label="{{ item.video_alt | default: item.image_alt | default: '' }}"></video>
         {%- else %}
-        <img src="{{ '/assets/research/' | append: item.image | relative_url }}"
+        <img class="{% if item.image_on_white %}on-white{% endif %}"
+             src="{{ '/assets/research/' | append: item.image | relative_url }}"
              alt="{{ item.image_alt | default: '' }}" loading="lazy">
         {%- endif %}
         {%- if item.caption or item.credit %}
