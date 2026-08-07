@@ -903,3 +903,9 @@ body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
     /* The pause button is sized in fixed pixels; scale it down here */
     .pg-toggle{ width:32px; height:32px; right:12px; bottom:12px; font-size:0.65rem; }
   }
+
+  /* One portrait per row on phones: two columns make the faces too small */
+@media (max-width:520px){
+  .people{ grid-template-columns:1fr; gap:32px; }
+  .person img{ aspect-ratio:4/5; }
+}
