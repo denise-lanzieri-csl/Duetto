@@ -893,16 +893,13 @@ body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
   .pg-toggle{ width:32px; height:32px; right:12px; bottom:12px; font-size:0.65rem; }
 }
  
-/* Fixes for the mobile menu panel */
-@media (max-width:760px){
-  .navlinks{
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
+
+/* Six labels never fit on a phone: show only the selected one. It keeps
+   its absolute position, so it lands right under the slider thumb. */
+   @media (max-width:700px){
+    .pg-ticks li{ display:none; }
+    .pg-ticks li.is-active{ display:block; color:var(--accent); }
+  
+    /* The pause button is sized in fixed pixels; scale it down here */
+    .pg-toggle{ width:32px; height:32px; right:12px; bottom:12px; font-size:0.65rem; }
   }
-  .masthead.is-open .navlinks{
-    max-height:calc(100vh - 64px);
-  }
-  .nav-toggle{
-    display:grid; place-items:center; align-content:center;
-  }
-}

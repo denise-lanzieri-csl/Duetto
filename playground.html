@@ -61,27 +61,17 @@ description: An interactive look at how creativity shapes what Duetto generates.
   var captions = {{ site.data.playground | map: "caption" | jsonify }};
   if (!slider || !videos.length) return;
 
-  // Wide screens: labels are positioned by hand, evenly from 0% to 100%,
-  // matching how the browser spaces the slider thumb.
-  // Narrow screens: the CSS shows only the active label, in normal flow,
-  // so any inline `left` has to be cleared.
-  var wideQuery = window.matchMedia('(min-width:701px)');
-
+  // Labels are spaced the way the browser spaces the slider thumb: evenly
+  // from 0% to 100%, in a container inset by half a thumb on each side.
+  // On narrow screens the CSS hides all but the active one, which then
+  // sits directly under the thumb.
   function placeTicks() {
-    var wide = wideQuery.matches;
     ticks.forEach(function (t, n) {
-      t.style.left = wide ? (n / (ticks.length - 1) * 100) + '%' : '';
+      t.style.left = (n / (ticks.length - 1) * 100) + '%';
     });
   }
   placeTicks();
-
-  // resize covers desktop; orientationchange covers phones, where the
-  // viewport is not updated yet at the moment the event fires
   window.addEventListener('resize', placeTicks);
-  window.addEventListener('orientationchange', function () {
-    setTimeout(placeTicks, 150);
-  });
-  if (wideQuery.addEventListener) { wideQuery.addEventListener('change', placeTicks); }
 
   var paused = false;
 
