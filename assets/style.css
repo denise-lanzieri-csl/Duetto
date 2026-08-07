@@ -879,7 +879,7 @@ body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
 .masthead{ position:sticky; }
 .masthead-inner{ position:relative; }
 
-/* On narrow screens six labels cannot fit: show only the active one */
+/* Six labels never fit on a phone: show only the selected one */
 @media (max-width:700px){
   .pg-ticks{ height:auto; margin:14px 0 0; text-align:center; }
   .pg-ticks li{
@@ -888,4 +888,21 @@ body.cinematic .masthead:not(.is-solid) .nav-toggle span{ background:#fff; }
     font-size:0.72rem; letter-spacing:0.12em;
   }
   .pg-ticks li.is-active{ display:block; color:var(--accent); }
+ 
+  /* The pause button is sized in fixed pixels; scale it down here */
+  .pg-toggle{ width:32px; height:32px; right:12px; bottom:12px; font-size:0.65rem; }
+}
+ 
+/* Fixes for the mobile menu panel */
+@media (max-width:760px){
+  .navlinks{
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .masthead.is-open .navlinks{
+    max-height:calc(100vh - 64px);
+  }
+  .nav-toggle{
+    display:grid; place-items:center; align-content:center;
+  }
 }
