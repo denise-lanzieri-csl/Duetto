@@ -4,4 +4,8 @@
     <a href="{{ '/contact/' | relative_url }}">Contact</a>
     {%- if site.github %} &middot; <a href="{{ site.github }}">GitHub</a>{% endif %}
   </span>
+  {%- comment -%} Site-wide credits, set as `credits:` in _config.yml {%- endcomment -%}
+  {%- if site.credits %}
+  <span class="colophon-credits">{{ site.credits }}</span>
+  {%- endif %}
 </footer>

@@ -147,7 +147,10 @@
                     title="{{ v.title }}" loading="lazy" allowfullscreen
                     allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
                     referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            <figcaption>{{ v.title }}</figcaption>
+            <figcaption>
+              {{ v.title }}
+              {%- if v.credit %}<span class="credit-line">{{ v.credit }}</span>{% endif %}
+            </figcaption>
           </figure>
           {%- endfor %}
         </div>
