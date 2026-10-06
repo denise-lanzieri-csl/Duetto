@@ -108,6 +108,7 @@
     than memorise what it has seen.
   blocks:
     - heading: Data collection
+      id: data-collection
       image: DSC00383.JPG
       image_alt: Uno scheletro tracciato in movimento su una griglia
       body: |
@@ -124,6 +125,7 @@
         design of the interactive system.
 
     - heading: Pose estimation
+      id: pose-estimation
       video: D1_M9_T2_svision.mp4
       video_on_white: true
       video_alt: How sVision tracks a moving body
@@ -134,6 +136,7 @@
         time.
 
     - heading: Quantising the body
+      id: Quantising-the-body
       video: video_som.mp4
       video_alt:  Quantising the body
       body: |
@@ -154,6 +157,7 @@
         grows out of how the space is organised.
 
     - heading: The generative model
+      id: The-generative-model
       body: |
         Built on top of the quantised representation, the generative core is
         an autoregressive model that produces movement token by token,
@@ -165,6 +169,7 @@
         fast enough to sustain unbroken interaction.
 
     - heading: Divergence as dialogue
+      id: Divergence-as-dialogue
       images:
         - image: som1.png
           alt: Superficie di attivazione della SOM con la zona di campionamento

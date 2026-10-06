@@ -5,13 +5,52 @@ permalink: /playground/
 dark_head: false
 heading: Duetto playground
 lede: >-
-  One dial, six settings. Move it and watch how far the system is allowed to
-  wander from the body it is listening to.
-description: An interactive look at how creativity shapes what Duetto generates.
+  Duetto, in two interactive pieces: what the system generates, and the
+  vocabulary it generates from.
+description: >-
+  An interactive look at how Duetto generates movement, and at the vocabulary
+  it generates from.
 ---
 
+{%- comment -%}
+  The SOM viewer, in a frame of its own. It carries its own stylesheet and
+  uses generic ids (header, main, #legend), so embedding it directly in the
+  page would collide with the site's CSS in a dozen places. A frame keeps
+  the two apart, and `loading="lazy"` means its data file is only fetched
+  once the reader scrolls this far.
+{%- endcomment -%}
+<section class="band tint">
+  <div class="wrap">
+    <div class="band-head"><h2>The map</h2><span class="hairline"></span></div>
+    <div class="prose">
+      <p>
+        Every cell below is one entry in the tokenizer's vocabulary: a posture
+        the model can use. Neighbouring cells hold similar postures, which is
+        what makes the space navigable rather than arbitrary. Hover a cell to
+        see the body it stands for, front and side.
+      </p>
+    </div>
+
+    <figure class="som-frame">
+      <iframe src="{{ '/assets/som/viewer.html' | relative_url }}"
+              title="Interactive map of the tokenizer's posture vocabulary"
+              loading="lazy"></iframe>
+      <figcaption>
+        120 × 120 cells, each a learned prototype of the 20-joint skeleton.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="band">
-  <div class="wrap pg">
+  <div class="wrap">
+    <div class="band-head"><h2>The dial</h2><span class="hairline"></span></div>
+    <div class="prose">
+      <p>
+        One dial, six settings. Move it and watch how far the system is allowed
+        to wander from the body it is listening to.
+      </p>
+    </div>
 
     {%- comment -%}
       Every clip is its own <video>. Only the active one is visible and
@@ -126,3 +165,4 @@ description: An interactive look at how creativity shapes what Duetto generates.
   }
 })();
 </script>
+

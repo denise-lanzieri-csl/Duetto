@@ -920,3 +920,169 @@
   /* Video on a white background: multiply drops the white and keeps the rest,
    so the clip sits on the page colour instead of inside a white box */
 .fig video.on-white{ mix-blend-mode:multiply; }
+
+
+/* ============================================================
+   PIPELINE — the projected flow of stages
+   A grid of line drawings, each with its label centred underneath.
+   Clicking one opens it over the whole page.
+   ============================================================ */
+
+   .flow{
+    list-style:none; margin:0; padding:0;
+    display:grid; gap:16px;
+  }
+  @media (min-width:680px){ .flow{ grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1000px){ .flow{ grid-template-columns:repeat(3,1fr); } }
+  .flow-item{ margin:0; }
+  
+  /* The tile is a button, so it needs its own reset */
+  .flow-card{
+    display:flex; flex-direction:column; align-items:center;
+    width:100%; padding:18px 12px 20px;
+    font:inherit; cursor:pointer;
+    background:transparent; border:1px solid transparent;
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .flow-card:hover{
+    background:color-mix(in srgb, var(--ink) 4%, transparent);
+    border-color:var(--rule);
+  }
+  .flow-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  
+  .flow-icon{
+    width:78%; height:auto;
+    color:var(--ink); opacity:.8;
+    transition:opacity .25s ease, transform .4s ease;
+  }
+  .flow-card:hover .flow-icon{ opacity:1; transform:scale(1.04); }
+  
+  .flow-step{
+    display:block; margin-top:18px; text-align:center;
+    font-family:var(--mono); font-size:0.74rem;
+    letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--accent);
+  }
+  
+  /* ---------- The full-page panel ---------- */
+  
+  /* Everything behind it fades back, so the open stage reads alone */
+  body.flow-dimmed main > section,
+  body.flow-dimmed .masthead,
+  body.flow-dimmed .colophon{
+    filter:blur(3px) opacity(.25);
+    transition:filter .3s ease;
+  }
+  
+  .flow-stage{
+    position:fixed; inset:0; z-index:200;
+    display:grid; place-items:center;
+    padding:clamp(20px, 4vw, 48px);
+    background:color-mix(in srgb, var(--paper) 94%, transparent);
+    opacity:0; visibility:hidden;
+    transition:opacity .3s ease, visibility .3s;
+  }
+  .flow-stage.is-open{ opacity:1; visibility:visible; }
+  
+  /* Title above, picture in the middle, text below — one centred column */
+  .flow-stage-inner{
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center; max-width:min(900px, 88vw); max-height:100%;
+  }
+  .flow-stage-step{
+    font-family:var(--mono); font-size:0.78rem;
+    letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 10px;
+  }
+  .flow-stage-inner h2{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(1.8rem, 3.6vw, 2.9rem);
+    line-height:1.08; letter-spacing:-0.03em;
+    margin:0 0 24px;
+  }
+  .flow-stage-media{ margin:0 0 24px; width:100%; }
+  .flow-stage-media img{
+    display:block; margin-inline:auto;
+    max-width:100%; max-height:50vh; width:auto; height:auto;
+  }
+  .flow-stage-blurb{
+    font-size:clamp(1.05rem, 1.6vw, 1.35rem);
+    line-height:1.5; color:#2C333B;
+    margin:0 0 20px; max-width:46ch;
+  }
+  .flow-stage-cta{
+    font-family:var(--mono); font-size:0.74rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent);
+    padding:10px 20px; border:1px solid var(--rule);
+    transition:border-color .2s ease;
+  }
+  .flow-stage-cta:hover{ border-color:var(--accent); text-decoration:none; }
+  
+  /* ---------- Close, arrows, position dots ---------- */
+  .flow-close,
+  .flow-arrow{
+    position:absolute; padding:0;
+    border:1px solid var(--rule); border-radius:50%;
+    background:var(--paper); color:var(--ink);
+    line-height:1; cursor:pointer;
+    display:grid; place-items:center;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .flow-close:hover,
+  .flow-arrow:hover{ border-color:var(--ink); color:var(--accent); }
+  .flow-close:focus-visible,
+  .flow-arrow:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  
+  .flow-close{
+    top:clamp(12px, 2.5vw, 32px); right:clamp(12px, 2.5vw, 32px);
+    width:48px; height:48px; font-size:1.5rem;
+  }
+  .flow-arrow{
+    top:50%; transform:translateY(-50%);
+    width:56px; height:56px; font-size:1.8rem;
+  }
+  .flow-arrow span{ margin-top:-4px; }   /* optical centring of the chevron */
+  .flow-arrow.prev{ left:clamp(8px, 3vw, 40px); }
+  .flow-arrow.next{ right:clamp(8px, 3vw, 40px); }
+  
+  .flow-dots{
+    position:absolute; left:50%; bottom:clamp(16px, 3vh, 36px);
+    transform:translateX(-50%);
+    list-style:none; display:flex; gap:10px; margin:0; padding:0;
+  }
+  .flow-dots li{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--rule); transition:background .2s ease;
+  }
+  .flow-dots li.is-active{ background:var(--accent); }
+  
+  @media (min-width:1400px){
+    .flow{ gap:24px; }
+    .flow-step{ font-size:0.82rem; }
+  }
+  
+  @media (prefers-reduced-motion: reduce){
+    .flow-card, .flow-icon, .flow-stage{ transition:none; }
+    .flow-card:hover .flow-icon{ transform:none; }
+    body.flow-dimmed main > section,
+    body.flow-dimmed .masthead,
+    body.flow-dimmed .colophon{ filter:opacity(.25); }
+  }
+
+
+/* ---------- SOM VIEWER (framed) ---------- */
+.som-frame{ margin:32px 0 0; max-width:none; }
+.som-frame iframe{
+  width:100%; height:620px;
+  border:1px solid var(--rule);
+  display:block; background:#111;
+}
+@media (max-width:860px){
+  .som-frame iframe{ height:760px; }
+}
+.som-frame figcaption{
+  font-family:var(--mono); font-size:0.7rem;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--muted); margin-top:10px;
+}

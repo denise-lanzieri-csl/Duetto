@@ -1,0 +1,143 @@
+---
+layout: default
+title: Pipeline
+permalink: /pipeline/
+dark_head: true
+heading: How Duetto works
+lede: >-
+  Six stages, from a body in a room to a body on stage answering a machine.
+description: The Duetto pipeline, stage by stage.
+---
+
+{%- comment -%}
+  Built to be projected while speaking. The grid shows a line drawing per
+  stage; clicking one opens it over the whole page, with the photograph and
+  the text. Arrows — or the left and right keys — step through the stages;
+  Escape or the close button put the grid back. Only the link inside the
+  panel leaves for the research page.
+{%- endcomment -%}
+
+<section class="band">
+  <div class="wrap">
+    <ol class="flow">
+      {%- for s in site.data.pipeline %}
+      <li class="flow-item">
+        {%- comment -%}
+          One uniform tile: the drawing fills it, the label sits inside at
+          the foot over a gradient, so every card is the same shape whatever
+          the length of its title.
+        {%- endcomment -%}
+        <button class="flow-card" type="button" data-index="{{ forloop.index0 }}">
+          {%- if s.icon %}
+          <img class="flow-icon" src="{{ '/assets/pipeline/' | append: s.icon | relative_url }}"
+               alt="" loading="lazy">
+          {%- endif %}
+          <span class="flow-step">{{ s.step }}</span>
+        </button>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+{%- comment -%} The overlay: one panel, filled from whichever stage is open {%- endcomment -%}
+<div class="flow-stage" id="flow-stage" aria-hidden="true">
+
+  <button class="flow-close" id="flow-close" type="button" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <button class="flow-arrow prev" id="flow-prev" type="button" aria-label="Previous stage">
+    <span aria-hidden="true">&#8249;</span>
+  </button>
+
+  <div class="flow-stage-inner">
+    <p class="flow-stage-step" id="flow-stage-step"></p>
+    <h2 id="flow-stage-title"></h2>
+    <figure class="flow-stage-media"><img id="flow-stage-img" src="" alt=""></figure>
+    <p class="flow-stage-blurb" id="flow-stage-blurb"></p>
+    <a class="flow-stage-cta" id="flow-stage-link" href="#">Click to read more</a>
+  </div>
+
+  <button class="flow-arrow next" id="flow-next" type="button" aria-label="Next stage">
+    <span aria-hidden="true">&#8250;</span>
+  </button>
+
+  <ol class="flow-dots" id="flow-dots" aria-hidden="true">
+    {%- for s in site.data.pipeline %}<li></li>{% endfor %}
+  </ol>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('flow-stage');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.flow-card'));
+  if (!stage || !cards.length) return;
+
+  var steps  = {{ site.data.pipeline | jsonify }};
+  var imgEl  = document.getElementById('flow-stage-img');
+  var stepEl = document.getElementById('flow-stage-step');
+  var ttlEl  = document.getElementById('flow-stage-title');
+  var blbEl  = document.getElementById('flow-stage-blurb');
+  var linkEl = document.getElementById('flow-stage-link');
+  var dots   = Array.prototype.slice.call(document.querySelectorAll('#flow-dots li'));
+  var assets = "{{ '/assets/pipeline/' | relative_url }}";
+  var site   = "{{ site.baseurl }}";
+
+  var current = 0, lastCard = null;
+
+  function fill(i) {
+    var s = steps[i];
+    if (!s) return;
+    current = i;
+    if (s.image) { imgEl.src = assets + s.image; imgEl.style.display = ''; }
+    else { imgEl.removeAttribute('src'); imgEl.style.display = 'none'; }
+    stepEl.textContent = s.step || '';
+    ttlEl.textContent  = s.title || '';
+    blbEl.textContent  = s.blurb || '';
+    // External links are used as given; internal ones get the site prefix
+    linkEl.setAttribute('href',
+      (s.url.indexOf('://') > -1) ? s.url : site + s.url);
+    dots.forEach(function (d, n) { d.classList.toggle('is-active', n === i); });
+  }
+
+  function open(i) {
+    lastCard = cards[i];
+    fill(i);
+    stage.classList.add('is-open');
+    stage.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('flow-dimmed');
+    document.getElementById('flow-close').focus();
+  }
+
+  function close() {
+    stage.classList.remove('is-open');
+    stage.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('flow-dimmed');
+    // Put focus back where it came from, for keyboard users
+    if (lastCard) { lastCard.focus(); }
+  }
+
+  function go(delta) { fill((current + delta + steps.length) % steps.length); }
+
+  cards.forEach(function (c, n) {
+    c.addEventListener('click', function () { open(n); });
+  });
+
+  document.getElementById('flow-close').addEventListener('click', close);
+  document.getElementById('flow-prev').addEventListener('click', function () { go(-1); });
+  document.getElementById('flow-next').addEventListener('click', function () { go(1); });
+
+  // Clicking the backdrop closes; clicking the panel itself does not
+  stage.addEventListener('click', function (e) {
+    if (e.target === stage) { close(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!stage.classList.contains('is-open')) return;
+    if (e.key === 'Escape')     { close(); }
+    if (e.key === 'ArrowLeft')  { go(-1); }
+    if (e.key === 'ArrowRight') { go(1); }
+  });
+})();
+</script>

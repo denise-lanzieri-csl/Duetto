@@ -1,0 +1,53 @@
+# ============================================================
+# PIPELINE — the stages shown on the /pipeline/ page.
+#
+# Built for projection: few words, large type, one glance.
+# Clicking a card opens a panel with the photograph and the
+# text; "click to read more" inside it goes to the research page.
+#
+# `icon`   line drawing in assets/pipeline/, shown on the card
+# `image`  photograph in assets/pipeline/, shown in the panel
+# `url`    the anchor on the research page
+# ============================================================
+
+- step: Data collection
+  title: Customized workshop
+  blurb: Dancers improvising across musical conditions, with choreographic guidance.
+  icon: icon-data.svg
+  image: step-data.jpg
+  url: /research/#data-collection
+
+- step: Pose estimation
+  title: Movements captured through skeletonization
+  blurb: sVision turns video into anatomical landmarks moving through space.
+  icon: icon-pose.svg
+  image: step-pose.png
+  url: /research/#pose-estimation
+
+- step: Encoding
+  title: Posture quantization
+  blurb: Postures become a vocabulary — a navigable map rather than a black box.
+  icon: icon-quantise.svg
+  image: step-som.png
+  url: /research/#quantising
+
+- step: Generation
+  title:  Autoregressive Model
+  blurb: Movement produced token by token, in real time, conditioned on history and live performer input
+  icon: icon-generate.svg
+  image: step-gen.jpg
+  url: /research/#generative-model
+
+- step: Exchange
+  title: Divergence as dialogue
+  blurb: The distance between the two bodies is the space the system works in.
+  icon: icon-dialogue.svg
+  image: step-dialogue.png
+  url: /research/#divergence
+
+- step: Stage
+  title: Live performance
+  blurb: From mirroring to full generation, in front of an audience.
+  icon: icon-stage.svg
+  image: step-stage.jpg
+  url: /events/
