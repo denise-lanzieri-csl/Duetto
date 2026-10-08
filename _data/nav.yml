@@ -7,21 +7,20 @@
 - title: Home
   url: /
 
-- title: Research
-  url: /research/
-
 - title: Pipeline
   url: /pipeline/
 
-  
-- title: Team
-  url: /team/
+- title: Playground
+  url: /playground/
+
+- title: Research
+  url: /research/
 
 - title: Events
   url: /events/
-
-- title: Playground
-  url: /playground/
+  
+- title: Team
+  url: /team/
 
 - title: Contact
   url: /contact/
