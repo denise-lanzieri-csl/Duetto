@@ -26,28 +26,28 @@
 
 - step: Encoding
   title: Posture quantization
-  blurb: Postures become a vocabulary — a navigable map rather than a black box.
+  blurb: Postures become a vocabulary, a navigable map rather than a black box.
   icon: icon-quantise.svg
-  image: step-som.png
-  url: /research/#quantising
+  video: step-som.mp4
+  url: /research/#quantising-the-body
 
 - step: Generation
   title:  Autoregressive Model
-  blurb: Movement produced token by token, in real time, conditioned on history and live performer input
+  blurb: Movements produced token by token, in real time, conditioned on machine history and live performer input
   icon: icon-generate.svg
-  image: step-gen.jpg
+  video: step-gen.mp4
   url: /research/#generative-model
 
-- step: Exchange
-  title: Divergence as dialogue
-  blurb: The distance between the two bodies is the space the system works in.
+- step: Smart Mirror
+  title: Human in the loop
+  blurb: Human action continuously shapes what the system understands and proposes, turning divergence into a form of dialogue.
   icon: icon-dialogue.svg
-  image: step-dialogue.png
-  url: /research/#divergence
+  video: step-dialogue.mp4
+  url: /research/#smart-mirror
 
 - step: Stage
   title: Live performance
   blurb: From mirroring to full generation, in front of an audience.
   icon: icon-stage.svg
-  image: step-stage.jpg
+  video: step-stage.mp4
   url: /events/

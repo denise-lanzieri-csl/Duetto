@@ -136,7 +136,7 @@
         time.
 
     - heading: Quantising the body
-      id: Quantising-the-body
+      id: quantising-the-body
       video: video_som.mp4
       video_alt:  Quantising the body
       body: |
@@ -157,7 +157,7 @@
         grows out of how the space is organised.
 
     - heading: The generative model
-      id: The-generative-model
+      id: generative-model
       body: |
         Built on top of the quantised representation, the generative core is
         an autoregressive model that produces movement token by token,
@@ -169,7 +169,7 @@
         fast enough to sustain unbroken interaction.
 
     - heading: Divergence as dialogue
-      id: Divergence-as-dialogue
+      id:  smart-mirror
       images:
         - image: som1.png
           alt: Superficie di attivazione della SOM con la zona di campionamento

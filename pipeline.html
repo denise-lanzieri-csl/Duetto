@@ -11,10 +11,11 @@ description: The Duetto pipeline, stage by stage.
 
 {%- comment -%}
   Built to be projected while speaking. The grid shows a line drawing per
-  stage; clicking one opens it over the whole page, with the photograph and
-  the text. Arrows — or the left and right keys — step through the stages;
-  Escape or the close button put the grid back. Only the link inside the
-  panel leaves for the research page.
+  stage; clicking one opens it over the whole page, with a photograph or a
+  looping video (`image:` or `video:` in _data/pipeline.yml) and the text.
+  Arrows — or the left and right keys — step through the stages; Escape or
+  the close button put the grid back. Only the link inside the panel leaves
+  for the research page.
 {%- endcomment -%}
 
 <section class="band">
@@ -54,7 +55,10 @@ description: The Duetto pipeline, stage by stage.
   <div class="flow-stage-inner">
     <p class="flow-stage-step" id="flow-stage-step"></p>
     <h2 id="flow-stage-title"></h2>
-    <figure class="flow-stage-media"><img id="flow-stage-img" src="" alt=""></figure>
+    <figure class="flow-stage-media">
+      <img id="flow-stage-img" src="" alt="">
+      <video id="flow-stage-video" muted loop playsinline preload="none" style="display:none"></video>
+    </figure>
     <p class="flow-stage-blurb" id="flow-stage-blurb"></p>
     <a class="flow-stage-cta" id="flow-stage-link" href="#">Click to read more</a>
   </div>
@@ -76,6 +80,7 @@ description: The Duetto pipeline, stage by stage.
 
   var steps  = {{ site.data.pipeline | jsonify }};
   var imgEl  = document.getElementById('flow-stage-img');
+  var vidEl  = document.getElementById('flow-stage-video');
   var stepEl = document.getElementById('flow-stage-step');
   var ttlEl  = document.getElementById('flow-stage-title');
   var blbEl  = document.getElementById('flow-stage-blurb');
@@ -84,14 +89,41 @@ description: The Duetto pipeline, stage by stage.
   var assets = "{{ '/assets/pipeline/' | relative_url }}";
   var site   = "{{ site.baseurl }}";
 
+  // Honour the reduced-motion setting: a video then waits for the viewer
+  // to press play, instead of starting by itself
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   var current = 0, lastCard = null;
+
+  // Show the stage's video if it has one, otherwise its photograph.
+  // The video is unloaded when not in use, so a closed panel downloads nothing.
+  function showMedia(s) {
+    if (s.video) {
+      imgEl.removeAttribute('src');
+      imgEl.style.display = 'none';
+
+      var full = assets + s.video;
+      if (vidEl.getAttribute('src') !== full) { vidEl.setAttribute('src', full); }
+      vidEl.style.display = '';
+      vidEl.controls = calm;
+      if (!calm) { vidEl.play().catch(function () {}); }
+      return;
+    }
+
+    vidEl.pause();
+    vidEl.removeAttribute('src');
+    vidEl.load();
+    vidEl.style.display = 'none';
+
+    if (s.image) { imgEl.src = assets + s.image; imgEl.style.display = ''; }
+    else { imgEl.removeAttribute('src'); imgEl.style.display = 'none'; }
+  }
 
   function fill(i) {
     var s = steps[i];
     if (!s) return;
     current = i;
-    if (s.image) { imgEl.src = assets + s.image; imgEl.style.display = ''; }
-    else { imgEl.removeAttribute('src'); imgEl.style.display = 'none'; }
+    showMedia(s);
     stepEl.textContent = s.step || '';
     ttlEl.textContent  = s.title || '';
     blbEl.textContent  = s.blurb || '';
@@ -114,6 +146,7 @@ description: The Duetto pipeline, stage by stage.
     stage.classList.remove('is-open');
     stage.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('flow-dimmed');
+    vidEl.pause();
     // Put focus back where it came from, for keyboard users
     if (lastCard) { lastCard.focus(); }
   }
