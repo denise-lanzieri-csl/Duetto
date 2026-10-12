@@ -13,36 +13,42 @@
   image: grid_animation.webp
   image_alt: Uno scheletro tracciato in movimento su una griglia
   summary: >-
-    The body is concrete enough to measure and open-ended enough to be
-    genuinely creative — a demanding testbed for exploratory AI.
+    Human movement is measurable, yet governed by fewer rigid rules than language,
+    making it a compelling domain for studying creativity in AI.
   body: |
     Building a system designed for genuine exploration means the choice of
-    domain is not neutral. We chose the human body because it sits in a
-    uniquely productive position: concrete enough to measure, open-ended
-    enough to be genuinely creative.
+    domain is not neutral. We study human movement as a complex dynamical system:
+    something we can observe, measure, and describe through quantitative and
+    qualitative metrics. But movement has a distinctive quality that makes it particularly interesting for AI research:
+    it is structured, yet open to possibility. 
 
-    Human movement is the expression of a complex dynamical system — a
-    high-dimensional trajectory through phase space, non-stationary,
-    sensitive to initial conditions, continuously modulated by the feedback
-    between internal state and external environment. As a time series it
-    carries information across simultaneous timescales, from joint-level
-    dynamics to gestural phrasing, and stays entangled with intention and
-    context in ways that make it irreducible to pure biomechanics.
+    Consider language. Words can be combined in countless ways, but their order is constrained by grammar and meaning.
+    Change that order too much, and a sentence may become difficult to understand or lose its meaning.
+
+    Movement works differently. The body obeys physical laws, and movements have their own forms of coherence,
+    shaped by context and intention. Yet within these constraints, there is far greater freedom to vary,
+    invent, and explore. In dance, there is rarely just one correct way to move.
+
+    This balance between structure and freedom makes human movement a particularly rich domain for generative AI:
+    a system must learn not only how movement is organised, but also where its possibilities begin.
   blocks:
     - heading: A spectrum of semantic constraint
       body: |
-        Unlike language, where a misplaced word breaks coherence, movement
-        operates across a range of tolerances. Expressive domains such as
-        dance afford vast combinatorial freedom: the syntax is permissive
-        and novelty is not an error. Procedural domains — a surgeon
-        operating, an athlete executing a technique — impose tight
-        boundaries where deviation carries real cost.
+        Not all movement follows the same rules. In dance, a movement
+        can be unexpected, unconventional, or entirely new and still be
+        meaningful.
+        In surgery or athletic performance, deviations from established
+        patterns may have functional or safety consequences.
 
-        The same body, the same joints, the same physics, but an entirely
-        different tolerance for variation. That spectrum is a feature: it
-        means a movement model is not one fixed notion of correctness, but
-        a framework that calibrates its generative logic to the semantic
-        regime of the application.
+        These domains lie at different points along a spectrum of constraints,
+        from open-ended creative exploration to precise, goal-oriented execution.
+        The challenge for a generative model is not simply to learn how movement
+        unfolds, but to understand which constraints matter in a given context
+        and how much freedom remains within them.
+
+        The same underlying principles can support both ends of this spectrum.
+        What changes is how the model balances exploration and precision,
+        adapting its generation to the purpose of the movement.
 
 - id: large-movement-model
   side: left
@@ -51,18 +57,22 @@
   image: D1_M17_T1_Frontal_trajectory.svg
   image_alt: Uno scheletro tracciato in movimento su una griglia
   summary: >-
-    Joints as vocabulary, movement sequences as sentences — a model that
-    learns the grammar of how a body moves through space and time.
+    Joints define the body's structure; movement sequences unfold like sentences.
+    A model learns the patterns that organise how bodies move through space and time.
   body: |
     What made large language models possible was not scale alone, but the
-    insight that language has a grammar: an underlying statistical structure
-    that, learned deeply enough, allows a system to generate coherent and
-    even creative output.
+    recognition that language has an underlying structure.
+    By learning its statistical regularities, a model can generate sequences
+    that are coherent, context-sensitive, and sometimes creative. 
 
-    Movement has a grammar too. A Large Movement Model is to the body what a
-    language model is to language — joints serve as vocabulary, movement
-    sequences as sentences, and the model learns the underlying rules of how
-    a body moves through space and time.
+    Movement offers a parallel opportunity. A Large Movement Model applies this
+    generative perspective to the dynamics of the human body. Rather than modelling
+    isolated poses, it learns the temporal relationships between body configurations:
+    how movements unfold, how one state leads to another, and how local actions
+    combine into longer sequences. <br>
+    The goal is to learn the underlying regularities of bodily motion well enough
+    to generate new trajectories, conditioned by context and responsive to the
+    movement unfolding in real time.
 
 - id: duetto
   tag: Application
@@ -71,26 +81,40 @@
   image_alt: Una danzatrice in scena accanto alla proiezione del suo scheletro digitale
   credit: CCN/Aterballetto al Festival Aperto con Microdanze e Over Dance
   summary: >-
-    A real-time generative system that follows a dancer's movement, learns
-    from it, and proposes alternative trajectories in return.
+    Duetto is a real-time generative system that follows a dancer's movement,
+    learns from it, and responds with alternative movement trajectories.
   body: |
     Duetto is the first application and proof of concept of the Large
     Movement Model, built around two questions: how technology can enrich
     dancers' creative practices, and whether deep learning can power a
     movement suggestion system for dancers.
 
-    The core challenge is a generative system capable of continuous,
-    real-time, bidirectional interaction with a human performer — without
-    the latency that would break creative flow. To the best of current
-    knowledge this remains an open problem in the field. The human moves,
-    the system listens, the system proposes, the human responds.
+    The central challenge is to build a generative system that can interact
+    continuously with a human performer in real time, without introducing
+    the delays that disrupt creative flow. The system must do more than track
+    or reproduce movement: it must generate new possibilities in response to
+    the performer's actions, while remaining responsive enough to sustain
+    an ongoing exchange.
+
+    The interaction is bidirectional. The dancer moves, the system responds,
+    and each response creates new possibilities for the dancer. What emerges
+    is not simply imitation, but a dialogue between human movement and
+    machine-generated motion.
   blocks:
     - heading: Why dance
       body: |
-        Dance was chosen not because it is the only application, but because
-        it represents the upper bound of movement complexity: maximally
-        free, expressive, and creative. If a system can hold a dialogue with
-        a dancer, it can hold one with any body in any context.
+        We chose dance because it offers an exceptionally demanding test of
+        movement generation. Its expressive freedom, temporal complexity, and
+        openness to novelty leave little room for predefined notions of correctness.
+
+        A system that can sustain a meaningful exchange with a dancer must do more
+        than reproduce familiar patterns: it must respond to an individual, adapt
+        to changing conditions, and generate possibilities without imposing a
+        fixed solution.
+
+        Dance therefore provides a demanding environment in which to investigate
+        principles that may extend to other movement domains, from sport and
+        rehabilitation to procedural and interactive tasks.
 
 - id: how-it-works
   tag: Method
@@ -98,160 +122,213 @@
   layout: centered
   collapsible: true
   summary: >-
-    From video to tokens to real-time generation — the pipeline behind the
-    live dialogue.
+    From video to discrete movement representations to real-time generation:
+    the pipeline that enables an ongoing dialogue between dancer and machine.
   body: |
-    The pipeline starts from video, from which we extract audio signals,
-    high-dimensional motion capture, and multimodal input from the body in
-    movement. From there the model learns to compress and structure that
-    data into latent representations, then to generate new movement rather
-    than memorise what it has seen.
+    The pipeline begins with video input, from which the system estimates the
+    body's motion as a sequence of spatial coordinates. These trajectories
+    are transformed into a structured, discrete representation that a
+    generative model can learn and manipulate.
+
+    The model then predicts new movement sequences, conditioned on previous
+    states and, in the interactive setting, on the performer's ongoing movement.
+
+    Each stage addresses a different challenge: extracting meaningful motion
+    from visual data, organising movement into a learnable representation, and
+    generating new trajectories fast enough to sustain real-time interaction.
+
   blocks:
     - heading: Data collection
       id: data-collection
       image: DSC00383.JPG
       image_alt: Uno scheletro tracciato in movimento su una griglia
       body: |
-        In the first session we recruited dancers across three experience
-        levels — professional, semi-professional, non-professional — and
-        captured their movement across nine musical conditions varying in
-        intensity, style, and tempo, to maximise diversity in the training
-        distribution.
+        In the first session, we recruited dancers across three experience
+        levels: professional, semi-professional, and non-professional, and
+        recorded their movement under nine musical conditions varying in
+        intensity, style, and tempo. The aim was to capture a diverse range
+        of movement patterns and expressive responses.
 
         In the second session, sixteen professional dancers each performed
         four improvised pieces under choreographic guidance. In two of the
-        four trials they moved while viewing a skeletonised projection of
-        their own body — a feedback condition that directly informed the
-        design of the interactive system.
+        four trials, dancers performed while viewing a skeletonised projection
+        of their own bodies. This feedback condition allowed us to investigate
+        how visual representations of movements could shape the performer’s
+        experience and informed the design of the interactive system.
 
-    - heading: Pose estimation
+    - heading: From video to movement
       id: pose-estimation
       video: D1_M9_T2_svision.mp4
       video_on_white: true
       video_alt: How sVision tracks a moving body
       body: |
-        Movement is captured with sVision, our real-time human pose
-        estimation pipeline, which extracts key anatomical landmarks and
-        represents the body as a set of spatial coordinates evolving over
-        time.
+        The first step is to extract movement information from video.
+        Using real-time human pose estimation, the system identifies
+        key body landmarks and tracks their positions over time, turning
+        the moving body into a sequence of spatial coordinates.
+
+        This representation makes movement measurable and provides the
+        foundation for the next stages: learning its patterns, modelling
+        its dynamics, and generating new movement in response to the performer.
 
     - heading: Quantising the body
       id: quantising-the-body
       video: video_som.mp4
-      video_alt:  Quantising the body
+      video_alt: Quantising the body
       body: |
         Raw joint coordinates must be transformed into a discrete vocabulary
-        a generative model can process. The choice of quantisation framework
-        determines whether the resulting token space is interpretable and
-        controllable, or simply a black box.
+        that a generative model can process. The choice of quantisation method
+        matters: it determines not only how movement is compressed, but also
+        which relationships between poses remain accessible to the model.
 
-        VQ-VAE is the current state of the art and serves as our baseline.
-        Building on it we developed SOM-VQ, which combines vector
-        quantisation with Self-Organising Maps to give the codebook an
-        explicit spatial structure: tokens that are close together represent
-        similar postures. This turns the codebook into a navigable map of
-        movement, and that structure is what makes real human-in-the-loop
-        interaction possible — a dancer can steer the system by moving
-        through the map, diverging from a reference, exploring nearby
-        regions, or returning toward a target. Control is not an add-on; it
-        grows out of how the space is organised.
+        Vector-quantised variational autoencoders (VQ-VAEs) provide a useful
+        baseline for learning discrete representations of continuous movement.
+        Building on this approach, we developed SOM-VQ, which combines vector
+        quantisation with Self-Organising Maps to organise the codebook into
+        an explicit spatial structure.
+
+        In this representation, neighbouring regions of the map are intended
+        to capture related movement patterns, making the latent space easier
+        to navigate and interpret. Rather than treating the codebook as an
+        opaque collection of discrete tokens, we use its organisation as a
+        basis for interactive control.
+
+        A dancer can guide generation by moving through this space: exploring nearby 
+        configurations, departing from a reference pose, or steering the system back 
+        towards a target region. Control is therefore not simply added on top of the 
+        generative model; it emerges from the structure of the representation itself.
 
     - heading: The generative model
       id: generative-model
       body: |
-        Built on top of the quantised representation, the generative core is
-        an autoregressive model that produces movement token by token,
-        conditioning each output on both the history of past states and the
-        live input from the performer.
+        At the core of the system is an autoregressive model that generates
+        movement one token at a time. Each prediction is conditioned on the
+        preceding sequence and, in the interactive setting, on the performer's
+        live input.
 
-        The critical requirement is real-time generation: the system must
-        produce new movement at every step, not replay cached sequences, and
-        fast enough to sustain unbroken interaction.
+        The challenge is not generation alone, but generation under real-time
+        constraints. New movement must be produced continuously, with sufficiently
+        low latency to sustain an uninterrupted exchange between performer and system.
+        This requires the generative model and the surrounding pipeline to operate as
+        a single responsive system, rather than relying on the replay of precomputed
+        sequences.
 
     - heading: Divergence as dialogue
-      id:  smart-mirror
+      id: smart-mirror
       images:
         - image: som1.png
           alt: Superficie di attivazione della SOM con la zona di campionamento
-          caption: SOM activation surface — brightness is proximity to the performer's pose.
+          caption: SOM activation surface. Brightness indicates proximity to the performer's current pose.
         - image: som2.png
           alt: Probabilità di campionamento del transformer nella stessa zona
-          caption: Next-token probabilities, restricted to the same zone.
+          caption: Transformer next-token probabilities, restricted to the same region of the map.
       body: |
-        The spatial gap between where the machine is and where the performer
-        is, is not an error — it is the creative distance the system
-        navigates. Proximity is enforced by the topology of the map rather
-        than by rules, continuously re-anchoring generation toward the
-        human.
+        The difference between the performer's current movement and the machine's
+        generated trajectory is not necessarily an error. It can become the creative
+        distance through which the interaction unfolds.
+
+        By constraining generation through the topology of the map, the system
+        can explore alternatives in the neighbourhood of the performer's current
+        state while remaining responsive to the human input. The map provides a
+        structured space in which the system can depart from the dancer's movement
+        without losing its connection to it.
+
+        The result is a form of interaction in which divergence is neither eliminated
+        nor left entirely unconstrained: it becomes a navigable dimension of the dialogue
+        between human and machine.
 
 - id: staying-open
   tag: Theory
   title: Staying open
   side: left
   image: recursion.jpeg
-  image_alt:  Recursion
+  image_alt: Recursion
   summary: >-
-    A system that learns only from you risks becoming a mirror. Dreaming
-    Learning is what lets it specialise without closing in.
+    How can an AI system learn from experience without losing its capacity to explore?
+    Our theoretical research investigates how generative models can preserve diversity
+    and balance structure with creativity.
   body: |
-    Generative models are remarkably good at compressing and reproducing the
-    world, but every time they do they risk losing part of their diversity.
-    Trained recursively on their own synthetic output, they progressively
-    lose diversity and degrade — what is now called model collapse.
+    Generative models learn patterns from data and use them to create new examples.
+    But what happens when a model repeatedly learns from its own outputs?
+    Over time, it can lose diversity and become increasingly limited in what
+    it can generate. This phenomenon is known as model collapse.
 
-    We found the problem runs deeper than architecture or scale. When a
-    model is trained on a finite set of examples through repeated
-    resampling, collapse eventually becomes inevitable. We identified the
-    iteration at which some of the original diversity disappears
-    irreversibly, and call it the extinction threshold.
+    Our theoretical research investigates two related challenges: how diversity
+    can be lost during repeated learning, and how to understand the boundary
+    between structured behaviour and increasingly unstable dynamics.
+
+    These questions matter for generative systems designed to interact with people.
+    A model should learn from experience and adapt to an individual without becoming
+    trapped in the patterns it has already seen. It needs structure, but also room
+    to explore.
   blocks:
-    - heading: Recursion as the cure
+    - heading: Learning to explore
       body: |
-        The problem is not recursion in itself — it is passive recursion.
-        Dreaming Learning uses the model's own synthetic output during
-        training, but to generate trajectories that maximise exploration
-        while remaining anchored to the real distribution. Synthetic data
-        becomes a controlled exploratory mechanism rather than a cheap
-        substitute for real data.
+        Learning is not just about reproducing patterns in existing data. It is also
+        about preparing for what has not yet been seen.
+        In one study, we investigate how synthetic data can help learning
+        systems explore new regions of the data space, preparing them to respond
+        when the statistical properties of the data change. Rather than treating
+        generated data simply as a substitute for real observations, this approach
+        uses exploration to expand what a model can learn from.
 
-        Alongside it, Lyapunov Learning at the Onset of Chaos trains models
-        to operate between rigidity and noise — the regime where a system is
-        both sensitive and structured.
+        A complementary perspective comes from a second study, which investigates 
+        how the dynamics of neural networks can be shaped
+        during training. By controlling Lyapunov exponents, the method aims to
+        improve the network’s ability to adapt to changes in the data. <br>
+        Together, these studies address a fundamental question: how can learning
+        systems remain adaptable when the world does not behave exactly as expected? 
+
+
+        Read the paper: <br>
+        [Dreaming Learning](https://arxiv.org/abs/2410.18156)<br>
+        [Read the paper: Lyapunov Learning at the Onset of Chaos](https://arxiv.org/abs/2506.12810)
 
     - heading: Why this matters for a dancer
       body: |
-        A system that learns only from one person risks becoming a mirror:
-        increasingly faithful, increasingly useless. This is model collapse
-        at a personal scale — not the loss of diversity across a population,
-        but the loss of the capacity to surprise. Dreaming Learning is the
-        mechanism that lets the system know a body deeply and, from that
-        knowledge, still offer a movement it has never tried.
+        A system that learns from one person’s movement should become increasingly
+        responsive to that person without simply repeating what it has already
+        seen. <br>
+        The challenge is to learn an individual’s movement patterns while leaving
+        room for surprise. A generative system should be able to recognise familiar
+        movements, respond to the performer’s choices, and still propose new
+        possibilities.
+
+        This is where the broader questions explored in our theoretical research
+        become relevant to movement generation: how can a model learn from
+        experience without becoming confined by it?
+
+        The ambition is to build a system that understands a body well enough to
+        interact with it meaningfully, while continuing to open up new directions
+        for movement.
 
 - id: beyond-the-stage
   tag: Outlook
   title: Beyond the stage
   gallery:
-    - image: sport.jpg
+    - image: sport.png
       alt: Un tennista a metà servizio
-    - image: cuisine.jpg
+    - image: cuisine.png
       alt: Mani che emulsionano una salsa
-    - image: rehab.jpg
+    - image: rehab.png
       alt: Una sessione di riabilitazione motoria
-    - image: npc.jpg
+    - image: npc.png
       alt: Personaggi non giocanti in un videogioco
   summary: >-
-    The architecture built for dance is not a dance architecture — it works
-    for any body, in any domain.
+    The architecture developed for dance is not limited to dance.
+    Its underlying principles can be adapted to different bodies, tasks, and domains.
   body: |
-    Everything built for the dancer applies to any body in motion: a gym, a
-    rehabilitation studio, a training field. A system that observes not how
-    an ideal athlete moves, nor how a statistical average moves, but how you
-    move — your habits, your asymmetries, your recurring patterns — and
-    keeps learning session after session.
+    The principles developed for dance may extend to other settings where
+    human movement matters: the gym, the rehabilitation studio, or the training field.
 
-    The architecture built for dance is not a dance architecture. It is an
-    architecture for any body, in any domain, with any tolerance for
-    variation: the same logic, calibrated differently.
+    Rather than modelling only how an ideal athlete should move, or how an average
+    person moves, such a system could learn how an individual actually moves,
+    their habits, asymmetries, and recurring patterns and adapt as new observations
+    accumulate across sessions.
+
+    The architecture developed for dance is therefore not inherently a dance architecture.
+    It provides a framework for modelling movement across domains, with the generative
+    constraints and objectives calibrated to each application.
 
 - id: performances
   tag: Live
@@ -261,19 +338,21 @@
   video_alt: Una danzatrice in scena accanto alla proiezione del suo scheletro digitale
 
   summary: >-
-    Duetto's first public appearance, staged as a progressive experiment in
-    human-machine interaction.
+    Duetto's first public appearance, presented through two live performances
+    tracing the transition from synchronised tracking to generative interaction.
   body: |
-    Duetto made its first public appearance at the IntelligentIA event
-    through two live performances designed as a progressive experiment.
+    Duetto made its first public appearance at the [IntelligentIA](https://intelligentia.live/) event through
+    two live performances conceived as a progressive exploration of human–machine
+    interaction.
 
-    The first started in fully synchronous mode, the digital skeleton
-    mirroring the dancer in real time, before a temporal delay was gradually
-    introduced and a visible misalignment opened between the two bodies. The
-    second shifted from synchrony into full generative mode, where the
-    skeleton began to propose movement rather than follow it.
+    The first began in fully synchronised mode, with the digital skeleton mirroring
+    the dancer in real time. A temporal delay was then gradually introduced,
+    creating a visible misalignment between the physical and digital bodies.
 
-    Together they mapped the project's research trajectory — from imitation
-    to interaction — functioning at once as artistic statement and as
-    experimental demonstration of the system's capacity to move between
-    operational modes.
+    The second performance moved from synchrony into generative mode, allowing
+    the digital skeleton to propose movements rather than simply follow the performer.
+
+    Together, the two performances traced the project's central research trajectory:
+    from imitation towards interaction. They served both as an artistic statement
+    and as a public demonstration of the system's ability to transition between
+    distinct modes of movement interaction.

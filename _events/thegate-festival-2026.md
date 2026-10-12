@@ -22,20 +22,16 @@ link: https://example.com/thegate
 link_label: Festival website
 ---
 
-As part of theGATE Festival 2026, Duetto was presented as an exploration of the
-relationship between artificial intelligence and human movement. The project
-resonated strongly with the context of theGATE, a festival dedicated to the
-convergence of science, technology, arts and society, and to the new forms of
-cultural experimentation emerging at their intersections.
+As part of theGATE Festival 2026, Duetto explored the relationship between 
+artificial intelligence and human movement through an interactive installation 
+at the [High-Performance Computing Center Stuttgart](https://www.hlrs.de/).
 
-Duetto was accompanied by an interactive installation inviting the public to
-engage directly with a dancing AI. Visitors did not only observe the project,
-but entered a live encounter with it, experiencing movement as a space of
-exchange between human presence and machine interpretation.
+The installation invited visitors to engage directly with a dancing AI. 
+Rather than simply observing the system, they could interact with it and 
+experience movement as an exchange between human action and machine-generated responses.
 
-By bringing together artistic research, scientific inquiry and technological
-experimentation, Duetto offered an example of how collaborations across
-disciplines can generate new questions, new forms, and new ways of imagining
-the relationship between humans and intelligent systems — approaching the body
-not as something to be reduced to data, but as a living source of knowledge,
-creativity and transformation.
+By bringing Duetto into a public setting, the festival created an opportunity 
+to experience the project beyond its scientific and artistic development. 
+The installation invited visitors to consider the body not merely as a source 
+of data for AI, but as a source of creativity, exploration, and new 
+possibilities for human–machine interaction.

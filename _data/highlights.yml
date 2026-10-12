@@ -16,40 +16,40 @@
   title: Duetto
   url: /research/#duetto
   text: >-
-    A real-time generative system that follows a dancer's movement, learns
-    from it, and proposes alternative trajectories in return.
+    A real-time generative system that responds to a dancer's movement,
+    learning from the performer while proposing new movement possibilities.
 
 - tag: Method
   title: How it works
-  url: /research/#how-it-works
+  url: /pipeline/
   text: >-
-    From video to tokens to real-time generation — the pipeline behind the
-    live dialogue.
+    From video-based pose estimation to movement generation — explore the
+    stages behind Duetto's real-time interaction.
 
 - tag: Live
   title: Duetto on stage
   url: /events/
   text: >-
-    Performances, installations and talks — where the project meets its
-    audience.
+    Discover how Duetto brings research into public spaces through live
+    performances, interactive installations, and talks.
 
 - tag: Foundations
   title: Why movement
   url: /research/#why-movement
   text: >-
-    The body is concrete enough to measure and open-ended enough to be
-    genuinely creative — a demanding testbed for exploratory AI.
+    Human movement combines measurable physical structure with a wide space
+    for variation, making it a compelling domain for generative AI.
 
 - tag: Events
   title: Outreach
   url: /events/
   text: >-
-    From the first public appearance at IntelligentIA to theGATE Festival in
-    Stuttgart — performances, installations and talks.
+    Meet Duetto through public presentations, artistic experiments, and
+    encounters with different audiences.
 
 - tag: Duetto playground
   title: Duetto playground
   url: /playground/
   text: >-
-    The architecture built for dance is not a dance architecture — it works
-    for any body, in any domain.
+    Explore Duetto's learned vocabulary of postures and discover how different
+    generation settings shape the movement it produces.    

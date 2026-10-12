@@ -45,15 +45,13 @@ sequences, much like sentences built within a discourse.
 
 But Duetto does not simply describe what the body does. It also tries to
 recognise relations, possibilities and transformations within gesture. In this
-sense it works as a kind of intelligent mirror — capable of observing
-movement, understanding it, and returning new expressive possibilities.
-
+sense it works as a kind of intelligent mirror, capable of observing
+movement, understanding it, and returning new expressive possibilities. <br>
 Dance is where the body expresses its complexity most fully. Technique,
 intention, memory, variation, listening, invention: a living language that
 holds together rigorous structure and potentially infinite freedom. It is not
 simply a field of application, but the ideal ground for a system meant to
-engage with the creative dimension of movement, and not only to read it.
-
+engage with the creative dimension of movement, and not only to read it. <br>
 What follows from this is a way of working we call human-in-the-loop: human
 action does not only come at the beginning, but continuously guides what the
 system understands and proposes. Artificial intelligence here is neither a

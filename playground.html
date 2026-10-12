@@ -5,8 +5,8 @@ permalink: /playground/
 dark_head: false
 heading: Duetto playground
 lede: >-
-  Duetto, in two interactive pieces: what the system generates, and the
-  vocabulary it generates from.
+  Explore Duetto through two interactive experiences: the vocabulary of postures it uses to represent the body, and the
+  the movement it generates.
 description: >-
   An interactive look at how Duetto generates movement, and at the vocabulary
   it generates from.
@@ -24,10 +24,11 @@ description: >-
     <div class="band-head"><h2>The map</h2><span class="hairline"></span></div>
     <div class="prose">
       <p>
-        Every cell below is one entry in the tokenizer's vocabulary: a posture
-        the model can use. Neighbouring cells hold similar postures, which is
-        what makes the space navigable rather than arbitrary. Hover a cell to
-        see the body it stands for, front and side.
+        Every cell represents a learned prototype in Duetto's posture vocabulary: 
+        a body configuration the model can use to represent movement. Nearby cells
+        represent similar postures, revealing the structure of this learned space.
+        Hover over a cell to see the corresponding body configuration from the front 
+        and side.
       </p>
     </div>
 
@@ -36,7 +37,7 @@ description: >-
               title="Interactive map of the tokenizer's posture vocabulary"
               loading="lazy"></iframe>
       <figcaption>
-        120 × 120 cells, each a learned prototype of the 20-joint skeleton.
+        120 × 120 cells, each representing a learned prototype of a 20-joint skeleton.
       </figcaption>
     </figure>
   </div>
@@ -47,8 +48,8 @@ description: >-
     <div class="band-head"><h2>The dial</h2><span class="hairline"></span></div>
     <div class="prose">
       <p>
-        One dial, six settings. Move it and watch how far the system is allowed
-        to wander from the body it is listening to.
+        One dial, six settings. Adjust it to explore how closely Duetto follows 
+        the performer’s movement, from more faithful responses to greater creative freedom.
       </p>
     </div>
 
