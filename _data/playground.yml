@@ -11,39 +11,37 @@
 # `caption` one or two lines describing what happens at this level
 # ============================================================
 
-- label: Mirror
-  video: creativity-0.mp4
+
+- label: Delay
+  video: delay.mp4
   poster: creativity-0.jpg
   caption: >-
-    The system reproduces the performer's movement almost exactly. Faithful,
-    and with nothing to offer back.
+    The system reproduces the performer’s movement after a delay.
+    The response follows the dancer, but does not yet introduce variation.
+
+
+- label: Mirror
+  video: shadow.mp4
+  poster: creativity-0.jpg
+  caption: >-
+    The system closely mirrors the performer’s movement, reproducing
+    the same postures with little room for variation.
 
 - label: Low
-  video: creativity-1.mp4
+  video: near.mp4
   caption: >-
-    Small deviations appear. The generated body stays close, but no longer
-    lands on the same postures.
+    Small deviations begin to appear. The generated movement stays close
+    to the performer’s, but no longer matches every posture.
 
 - label: Moderate
-  video: creativity-2.mp4
+  video: creative.mp4
   caption: >-
-    The system starts proposing transitions the performer did not make,
-    while keeping the overall phrasing recognisable.
-
-- label: High
-  video: creativity-3.mp4
-  caption: >-
-    Generation moves further across the map. Shared rhythm remains, but the
-    sequences diverge.
-
-- label: Very high
-  video: creativity-4.mp4
-  caption: >-
-    The two bodies hold only a loose relationship. What the system proposes
-    is largely its own.
+    The system begins to propose transitions the performer did not make,
+    introducing new movement possibilities while preserving a recognisable flow.
 
 - label: Unanchored
-  video: creativity-5.mp4
+  video: free.mp4
   caption: >-
-    Without the pull back toward the performer, movement drifts into
-    incoherence. The dialogue breaks.
+    The connection between the two bodies becomes loose, and the generated
+    movement increasingly follows its own trajectory. Without enough influence
+    from the performer, coherence can break down and the dialogue can dissolve.
