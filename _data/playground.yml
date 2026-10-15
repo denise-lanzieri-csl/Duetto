@@ -20,28 +20,31 @@
     The response follows the dancer, but does not yet introduce variation.
 
 
-- label: Mirror
+- label: Low
   video: shadow.mp4
   poster: creativity-0.jpg
-  caption: >-
-    The system closely mirrors the performer’s movement, reproducing
-    the same postures with little room for variation.
-
-- label: Low
-  video: near.mp4
   caption: >-
     Small deviations begin to appear. The generated movement stays close
     to the performer’s, but no longer matches every posture.
 
 - label: Moderate
-  video: creative.mp4
+  video: near.mp4
   caption: >-
     The system begins to propose transitions the performer did not make,
     introducing new movement possibilities while preserving a recognisable flow.
+    
 
 - label: High
-  video: free.mp4
+  video: creative.mp4
   caption: >-
     The connection between the two bodies becomes loose, and the generated
     movement increasingly follows its own trajectory. Without enough influence
     from the performer, coherence can break down and the dialogue can dissolve.
+
+    
+
+- label: Free
+  video: free.mp4
+  caption: >-
+   The system generates movement freely, without following or responding to the performer’s gestures.
+   Its movement develops independently, with no constraints imposed by the performer.
