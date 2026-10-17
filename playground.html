@@ -5,7 +5,7 @@ permalink: /playground/
 dark_head: false
 heading: Duetto playground
 lede: >-
-  Explore Duetto through two interactive experiences: the vocabulary of postures it uses to represent the body, and the
+  Explore Duetto through two interactive experiences: the vocabulary of postures it uses to represent the body, and
   the movement it generates.
 description: >-
   An interactive look at how Duetto generates movement, and at the vocabulary
@@ -48,15 +48,15 @@ description: >-
     <div class="band-head"><h2>The dial</h2><span class="hairline"></span></div>
     <div class="prose">
       <p>
-        One dial, five settings. Adjust it to explore how closely Duetto follows 
+        One dial, four settings. Adjust it to explore how closely Duetto follows 
         the performer’s movement, from more faithful responses to greater creative freedom.
       </p>
     </div>
 
     {%- comment -%}
       Every clip is its own <video>. Only the active one is visible and
-      playing; the others load on first selection and then stay ready,
-      so switching back is instant.
+      playing; the others load on first selection and then stay ready.
+      Each time a setting is selected, its clip starts from the beginning.
     {%- endcomment -%}
     <div class="pg-stage">
       {%- for l in site.data.playground %}
@@ -68,6 +68,16 @@ description: >-
              muted loop playsinline preload="{% if forloop.first %}auto{% else %}none{% endif %}"
              aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"></video>
       {%- endfor %}
+      <button class="pg-sound" id="pg-sound" type="button"
+            aria-pressed="false" aria-label="Turn sound on">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
+            fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor" stroke="none"/>
+          <g class="pg-sound-waves"><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a8 8 0 0 1 0 11"/></g>
+          <g class="pg-sound-off"><path d="M16 9.5l5 5M21 9.5l-5 5"/></g>
+        </svg>
+      </button>
       <button class="pg-toggle" id="pg-toggle" type="button" aria-label="Pause">&#9612;&#9612;</button>
     </div>
 
@@ -92,78 +102,138 @@ description: >-
 </section>
 
 <script>
-(function () {
-  var slider   = document.getElementById('pg-slider');
-  var toggle   = document.getElementById('pg-toggle');
-  var videos   = Array.prototype.slice.call(document.querySelectorAll('.pg-video'));
-  var ticks    = Array.prototype.slice.call(document.querySelectorAll('.pg-ticks li'));
-  var caption  = document.getElementById('pg-caption');
-  var captions = {{ site.data.playground | map: "caption" | jsonify }};
-  if (!slider || !videos.length) return;
-
-  // Each label gets its share of the track as a custom property, not as an
-  // inline `left`. An inline style would beat every stylesheet rule, so the
-  // mobile layout could never override it; a variable leaves the CSS free to
-  // use it on wide screens and ignore it on narrow ones.
-  ticks.forEach(function (t, n) {
-    t.style.setProperty('--x', (n / (ticks.length - 1) * 100) + '%');
-  });
-
-  var paused = false;
-
-  function show(i) {
-    var next = videos[i];
-    if (!next) return;
-
-    // Load on first use, then keep it around
-    if (!next.getAttribute('src')) {
-      next.setAttribute('src', next.dataset.src);
-      next.preload = 'auto';
+  (function () {
+    var slider   = document.getElementById('pg-slider');
+    var toggle   = document.getElementById('pg-toggle');
+    var soundBtn = document.getElementById('pg-sound');
+    var videos   = Array.prototype.slice.call(document.querySelectorAll('.pg-video'));
+    var ticks    = Array.prototype.slice.call(document.querySelectorAll('.pg-ticks li'));
+    var caption  = document.getElementById('pg-caption');
+    var captions = {{ site.data.playground | map: "caption" | jsonify }};
+    if (!slider || !videos.length) return;
+  
+    // Each label gets its share of the track as a custom property, not as an
+    // inline `left`. An inline style would beat every stylesheet rule, so the
+    // mobile layout could never override it; a variable leaves the CSS free to
+    // use it on wide screens and ignore it on narrow ones.
+    ticks.forEach(function (t, n) {
+      t.style.setProperty('--x', (n / (ticks.length - 1) * 100) + '%');
+    });
+  
+    var paused  = false;
+    // Clips start muted, which is the only way a browser lets them autoplay.
+    // Sound is opt-in, through the speaker button.
+    var soundOn = false;
+  
+    function noop() {}
+  
+    function activeVideo() {
+      return videos.find(function (x) { return x.classList.contains('is-active'); });
     }
-
-    videos.forEach(function (v) {
-      var on = v === next;
-      // Carry the playback position over, so the body does not jump
-      if (on && !v.classList.contains('is-active')) {
-        var from = videos.find(function (x) { return x.classList.contains('is-active'); });
-        if (from && from.duration && v.duration) {
-          try { v.currentTime = from.currentTime % v.duration; } catch (e) {}
-        }
+  
+    // Play a clip with the current sound setting. If the browser refuses sound
+    // (some phones only allow it straight from a tap), carry on silently and
+    // let the button show the truth instead of leaving a frozen clip.
+    function playClip(v) {
+      var p = v.play();
+      if (p && p.catch) {
+        p.catch(function () {
+          if (!v.muted) {
+            v.muted = true;
+            soundOn = false;
+            syncSound();
+            var q = v.play();
+            if (q && q.catch) q.catch(noop);
+          }
+        });
       }
-      v.classList.toggle('is-active', on);
-      v.setAttribute('aria-hidden', on ? 'false' : 'true');
-      if (on) { if (!paused) v.play().catch(function(){}); } else { v.pause(); }
+    }
+  
+    function syncSound() {
+      if (!soundBtn) return;
+      soundBtn.classList.toggle('is-on', soundOn);
+      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+      soundBtn.setAttribute('aria-label', soundOn ? 'Turn sound off' : 'Turn sound on');
+    }
+  
+    // Jump a clip to time t as soon as it knows its own length. A clip that is
+    // already loaded can be moved at once; one that was only just given its
+    // source has to wait for its metadata, and is moved before it first shows.
+    function startAt(v, t) {
+      function seek() {
+        if (v.duration) { try { v.currentTime = t % v.duration; } catch (e) {} }
+      }
+      if (v.readyState >= 1) { seek(); return; }
+      v.addEventListener('loadedmetadata', function once() {
+        v.removeEventListener('loadedmetadata', once);
+        seek();
+      });
+    }
+  
+    function show(i) {
+      var next = videos[i];
+      if (!next) return;
+  
+      ticks.forEach(function (t, n) { t.classList.toggle('is-active', n === i); });
+      caption.textContent = captions[i];
+  
+      // Check the current clip BEFORE any class changes, so that dragging
+      // within the same setting does not restart it over and over.
+      var from = activeVideo();
+      if (from === next) return;
+  
+      // Load on first use, then keep it around
+      if (!next.getAttribute('src')) {
+        next.setAttribute('src', next.dataset.src);
+        next.preload = 'auto';
+      }
+      startAt(next, 0);   // every setting starts its clip from the beginning
+  
+      videos.forEach(function (v) {
+        var on = v === next;
+        v.classList.toggle('is-active', on);
+        v.setAttribute('aria-hidden', on ? 'false' : 'true');
+        if (!on) { v.pause(); v.muted = true; }
+      });
+  
+      next.muted = !soundOn;
+      if (!paused) playClip(next);
+    }
+  
+    slider.addEventListener('input', function () { show(parseInt(this.value, 10)); });
+  
+    ticks.forEach(function (t, n) {
+      t.addEventListener('click', function () { slider.value = n; show(n); });
     });
-
-    ticks.forEach(function (t, n) { t.classList.toggle('is-active', n === i); });
-    caption.textContent = captions[i];
-  }
-
-  slider.addEventListener('input', function () { show(parseInt(this.value, 10)); });
-
-  ticks.forEach(function (t, n) {
-    t.addEventListener('click', function () { slider.value = n; show(n); });
-  });
-
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      paused = !paused;
-      var active = videos.find(function (v) { return v.classList.contains('is-active'); });
-      if (!active) return;
-      if (paused) { active.pause(); } else { active.play().catch(function(){}); }
-      toggle.innerHTML = paused ? '&#9654;' : '&#9612;&#9612;';
-      toggle.setAttribute('aria-label', paused ? 'Play' : 'Pause');
-    });
-  }
-
-  // Honour the reduced-motion setting: start paused on the poster
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    paused = true;
-    toggle.innerHTML = '&#9654;';
-    toggle.setAttribute('aria-label', 'Play');
-  } else {
-    videos[0].play().catch(function(){});
-  }
-})();
-</script>
-
+  
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        paused = !paused;
+        var active = activeVideo();
+        if (!active) return;
+        if (paused) { active.pause(); } else { playClip(active); }
+        toggle.innerHTML = paused ? '&#9654;' : '&#9612;&#9612;';
+        toggle.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+      });
+    }
+  
+    if (soundBtn) {
+      soundBtn.addEventListener('click', function () {
+        soundOn = !soundOn;
+        var active = activeVideo();
+        if (active) active.muted = !soundOn;
+        syncSound();
+      });
+      syncSound();
+    }
+  
+    // Honour the reduced-motion setting: start paused on the poster
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      paused = true;
+      toggle.innerHTML = '&#9654;';
+      toggle.setAttribute('aria-label', 'Play');
+    } else {
+      videos[0].play().catch(noop);
+    }
+  })();
+  </script>

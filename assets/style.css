@@ -1087,3 +1087,27 @@
   letter-spacing:0.08em; text-transform:uppercase;
   color:var(--muted); margin-top:10px;
 }
+
+
+
+/* ---------- Dial: sound button, beside the pause button ---------- */
+.pg-sound{
+  position:absolute; z-index:2; right:62px; bottom:16px;
+  width:38px; height:38px; padding:0; border-radius:50%;
+  border:1px solid rgba(255,255,255,.5); background:rgba(0,0,0,.25);
+  color:#fff; cursor:pointer;
+  display:grid; place-items:center;
+  transition:background .2s ease;
+}
+.pg-sound:hover{ background:rgba(0,0,0,.5); }
+.pg-sound:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+
+/* Off: a speaker with a cross. On: the cross gives way to sound waves. */
+.pg-sound-waves{ display:none; }
+.pg-sound.is-on .pg-sound-waves{ display:inline; }
+.pg-sound.is-on .pg-sound-off{ display:none; }
+
+@media (max-width:700px){
+  .pg-sound{ width:32px; height:32px; right:52px; bottom:12px; }
+  .pg-sound svg{ width:16px; height:16px; }
+}
