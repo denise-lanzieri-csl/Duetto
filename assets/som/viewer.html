@@ -241,7 +241,7 @@
         Inactive
       </div>
       <div class="legend-item">
-        <div class="legend-swatch" style="background:linear-gradient(90deg,rgb(250,250,248),rgb(150,190,195),rgb(15,95,92),rgb(0,51,102),rgb(16,20,34));border:1px solid var(--rule);width:40px;"></div>
+        <div class="legend-swatch" style="background:linear-gradient(90deg,rgb(0,0,4),rgb(20,14,54),rgb(59,15,112),rgb(100,26,128),rgb(140,41,129),rgb(183,55,121),rgb(222,73,104),rgb(247,112,92),rgb(254,159,109),rgb(254,207,146),rgb(252,253,191));border:1px solid var(--rule);width:40px;"></div>
         U-matrix: interior → boundary
       </div>
       <div class="legend-item">
@@ -331,17 +331,25 @@ function computeUmatrixRange(som) {
   vals.sort((a, b) => a - b);
   UMIN = vals[Math.floor(vals.length * 0.001)];
   UMAX = vals[Math.floor(vals.length * 0.99)];
+/*   UMIN = -0.023;
+  UMAX =  0.334; */
   if (UMAX <= UMIN) { UMIN = 0; UMAX = 1; }
 }
 
 // Multi-stop ramp: page colour → pale blue → teal → navy → ink. More stops
 // than a straight two-colour fade, so neighbouring values stay apart.
 const UMATRIX_STOPS = [
-  [250,250,248],
-  [150,190,195],
-  [ 15, 95, 92],
-  [  0, 51,102],
-  [ 16, 20, 34],
+  [  0,  0,  4],
+  [ 20, 14, 54],
+  [ 59, 15,112],
+  [100, 26,128],
+  [140, 41,129],
+  [183, 55,121],
+  [222, 73,104],
+  [247,112, 92],
+  [254,159,109],
+  [254,207,146],
+  [252,253,191],
 ];
 
 
